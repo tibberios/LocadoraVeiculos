@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import Entidades.Veiculo;
 
+
 public class RepositorioVeiculo {
 	private ArrayList <Veiculo> veiculo;
 
@@ -19,7 +20,7 @@ public class RepositorioVeiculo {
 		}
 		return false;
 	}
-	
+
 	public void inserirVeiculo(Veiculo veiculo) {
 		if(this.veiculo.contains(veiculo)) {
 			JOptionPane.showMessageDialog(null, "Veiculo já existe!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -27,6 +28,14 @@ public class RepositorioVeiculo {
 			this.veiculo.add(veiculo);
 			JOptionPane.showMessageDialog(null, "Veiculo inserido com sucesso!");
 		}
+	}
+
+	public void ProcurarVeiculo(String placa) {
+		
+	}
+
+	public void removerVeiculo() {
+
 	}
 
 }
