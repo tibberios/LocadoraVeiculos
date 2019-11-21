@@ -5,15 +5,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
-import Dados.RepositorioPessoa;
+
 import Util.Pessoa;
 
 public class ControlePessoa {
-	private RepositorioPessoa repositorio;
 	Pessoa pessoa;
 	
 	public ControlePessoa() {
-		repositorio = new RepositorioPessoa();
+		
 	}
 
 	public boolean validarNome(String nome) {

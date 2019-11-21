@@ -128,9 +128,9 @@ public class CadastroUsuario extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnFunc.isSelected() == true) {
-					fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "funcionario");
+			//		fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "funcionario");
 				} else if (rdbtnCliente.isSelected() == true) {
-					fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "cliente");
+			//		fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "cliente");
 				} else {
 					JOptionPane.showMessageDialog(null, "Selecione o tipo do usuário!", "Erro", JOptionPane.WARNING_MESSAGE);
 				}
