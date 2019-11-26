@@ -1,5 +1,7 @@
 package Fachada;
 
+import javax.swing.JOptionPane;
+
 import Negocio.ControleFuncionario;
 import Negocio.ControlePessoa;
 
@@ -21,13 +23,16 @@ public class Fachada {
 		return Fachada.instance;
 	}
 
-	public void inserirPessoa (String nome, String cpf, String senha, String telefone, String email, String tipo_inserir) {
-		//no botao inserir da inteface grafica, ao chamar essa função, ira passar no ultimo parametro "funcionario" ou "cliente" para saber o tipo de pessoa que irá inserir
-		if (tipo_inserir.equals("funcionario")) {
-			boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone);
+	public void inserirPessoa (String nome, String cpf, String senha, String telefone, String email) {
+		if (email != null || !email.isEmpty() && !email.equals("cliente")) {
+			boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
 			if (inserido == true) {
 				this.funcionario.inserirFuncionario(nome, cpf, senha, telefone, email);
+			} else {
+				JOptionPane.showMessageDialog(null, "Parametros obrigatorios nao preenchidos", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
+		} else {
+			
 		}
 	}
 }

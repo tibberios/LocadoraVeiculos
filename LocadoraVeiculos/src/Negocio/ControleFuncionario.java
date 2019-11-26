@@ -15,9 +15,7 @@ public class ControleFuncionario {
 	}
 
 	public void inserirFuncionario(String nome, String cpf, String senha, String telefone, String email) {
-		
-		
-		funcionario = new Funcionario(nome, cpf, senha, telefone, email);	
+		funcionario = new Funcionario(nome, cpf, senha, telefone, email, 1, 2);	
 		repositorio.inserirFuncionario(funcionario);
 	}	
 }

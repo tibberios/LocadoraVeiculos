@@ -83,13 +83,21 @@ public class ControlePessoa {
 		return false;
 	}
 	
-	public boolean validarDadosPessoa(String nome, String cpf, String senha, String telefone) {
+	public boolean validarEmail(String email) {
+		 String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+         Pattern p = Pattern.compile(ePattern);
+         Matcher m = p.matcher(email);
+         return m.matches();
+	}
+	
+	public boolean validarDadosPessoa(String nome, String cpf, String senha, String telefone, String email) {
 		boolean validar_nome = this.validarNome(nome);
 		boolean validar_cpf = this.validarCPF(cpf);
 		boolean validar_senha = this.validarSenha(senha);
 		boolean validar_telefone = this.validarTelefone(telefone);
+		boolean validar_email = this.validarEmail(email);
 		
-		if (validar_nome == true && validar_cpf == true && validar_senha == true && validar_telefone == true) {
+		if (validar_nome == true && validar_cpf == true && validar_senha == true && validar_telefone == true && validar_email == true) {
 			return true;
 		}
 		return false;
