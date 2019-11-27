@@ -8,7 +8,7 @@ public class Veiculo {
 	private int km_rodados;
 	private int ano;
 	private double preco;
-	private boolean Status;
+	private int Status;
 
 
 	public Veiculo(String placa , String marca , String modelo , String cor , int ano , double preco ){
@@ -19,7 +19,21 @@ public class Veiculo {
 		this.marca = marca;
 		this.ano = ano;
 		this.preco = preco;
-		this.setStatus(true);
+		this.setStatus(1);
+
+	}
+	
+	public Veiculo(String placa , String marca , String modelo , String cor , int ano , double preco, int km_rodados,int Status ){
+		this.placa = placa;
+		this.cor = cor;
+		this.modelo = modelo;
+		this.km_rodados = 0;
+		this.marca = marca;
+		this.ano = ano;
+		this.preco = preco;
+		this.km_rodados= km_rodados;
+		this.Status = Status;
+	
 
 	}
 	public String getPlaca() {
@@ -71,11 +85,11 @@ public class Veiculo {
 		return 0 ; 
 	}
 	
-	public boolean isStatus() {
+	public int isStatus() {
 		return Status;
 	}
 	
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		Status = status;
 	}
 }

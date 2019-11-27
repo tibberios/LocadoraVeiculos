@@ -1,17 +1,24 @@
 package Teste;
 
 import BancodeDados.Conexao;
+import Dados.RepositorioVeiculo;
+import Entidades.Veiculo;
 
 public class Main {
 
 	public static void main(String[] args) {
+		
+		RepositorioVeiculo  repositorio = new RepositorioVeiculo();
+		
+		Veiculo veiculo = new Veiculo("PDA-0715", "Nissan", "HB20", "Branco", 2015, 200000.0);
+		
 		Conexao.getInstance().conectar();
-		
-		String sql = "INSERT INTO cliente(cpf, nome, senha, telefone) VALUES ('11111111111','TesteBD','123456','')";
-		
-		Conexao.getInstance().executaSQL(sql);
-
+		repositorio.inserirVeiculo(veiculo);
 		Conexao.getInstance().desconectar();
+		
+		
+		
+		
 	}
 
 }
