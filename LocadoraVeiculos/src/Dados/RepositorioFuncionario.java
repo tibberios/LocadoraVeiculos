@@ -58,6 +58,7 @@ public class RepositorioFuncionario implements UtilFunctions{
 	}
 	
 	public boolean verificarSeExiste(Funcionario funcionario) {
+		this.find(funcionario.getCpf());
 		for (Funcionario func: funcionarios) {
 			if (funcionario.getCpf().equals(func.getCpf())) {
 				return true;

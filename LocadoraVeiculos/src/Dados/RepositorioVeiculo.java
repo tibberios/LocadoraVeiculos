@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import BancodeDados.Conexao;
 import Entidades.Funcionario;
 import Entidades.Veiculo;
+import Excecoes.PlacaExisteExeception;
 import Util.UtilFunctions;
 
 
@@ -19,32 +20,41 @@ public class RepositorioVeiculo implements UtilFunctions{
 	}
 
 	public boolean verifarSeexiste(Veiculo veiculo) {
+		this.find(veiculo.getPlaca());
 		for(Veiculo car : veiculos) {
 			if(veiculo.getPlaca().equals(car.getPlaca())){
 				return true;
 			}
 		}
-		
-			return false;
+
+		return false;
 	}
 
-	public void inserirVeiculo(Veiculo veiculo) {
+	public void inserirVeiculo(Veiculo veiculo) throws PlacaExisteExeception {
 		String sql = "INSERT INTO veiculo(placa, marca, modelo, cor, km_rodados, ano, preco) VALUES (";
-		sql += "'"+veiculo.getPlaca()+"', ";
-		sql += "'"+veiculo.getMarca()+"', ";
-		sql += "'"+veiculo.getModelo()+"', ";
-		sql += "'"+veiculo.getCor()+"', ";
-		sql += "'"+veiculo.getKilometragem()+"', ";
-		sql += "'"+veiculo.getAno()+"', ";
-		sql += "'"+veiculo.getPreco()+"')";
-
+	
+		if(this.verifarSeexiste(veiculo)==false) {
+			sql += "'"+veiculo.getPlaca()+"', ";
+			sql += "'"+veiculo.getMarca()+"', ";
+			sql += "'"+veiculo.getModelo()+"', ";
+			sql += "'"+veiculo.getCor()+"', ";
+			sql += "'"+veiculo.getKilometragem()+"', ";
+			sql += "'"+veiculo.getAno()+"', ";
+			sql += "'"+veiculo.getPreco()+"')";
 		Conexao.getInstance().executaSQL(sql);
-		
+		}else {
+			throw new PlacaExisteExeception (veiculo.getPlaca());
+		}
 	}
 
-	public void removerVeiculo() {
-		
+	public void removerVeiculo(Veiculo veiculo) {
+		for(Veiculo car : veiculos) {
+			if(veiculo.getPlaca().equals(car.getPlaca())== true){
 
+
+
+			}
+		}
 	}
 
 	@Override
@@ -52,7 +62,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 		veiculos.clear();
 		String sql = "SELECT * FROM funcionario";
 		Conexao.getInstance().buscarSQL(sql);
-		
+
 		try {
 			while (Conexao.getInstance().getResultset().next()) {
 				veiculo = new Veiculo(Conexao.getInstance().getResultset().getString("placa"), Conexao.getInstance().getResultset().getString("marca"),
@@ -65,8 +75,8 @@ public class RepositorioVeiculo implements UtilFunctions{
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-		
-		
+
+
 
 	@Override
 	public void find(String placa) {
@@ -86,7 +96,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 		Conexao.getInstance().setResultset(null);	
 	}
 

@@ -52,6 +52,7 @@ public class RepositorioCliente implements UtilFunctions {
 	}
 	
 	public boolean verificarSeExiste(Cliente Cliente) {
+		this.find(Cliente.getCpf());
 		for (Cliente func: clientes) {
 			if (Cliente.getCpf().equals(func.getCpf())) {
 				return true;
