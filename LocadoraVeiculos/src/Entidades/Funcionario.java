@@ -6,17 +6,14 @@ public class Funcionario extends Pessoa {
 	private int status;
 	private String email;
 	private int tipo;
+	private String senha;
 	
 	public Funcionario (String nome, String cpf, String senha, String telefone, String email, int status, int tipo) {
-		super (nome, cpf, senha, telefone);
+		super (nome, cpf, telefone);
 		this.setEmail(email);
-		if (status != 0) {
-			this.setStatus(status);
-		}
-		
-		if (tipo != 0) {
-			this.setTipo(tipo);
-		}
+		this.setStatus(status);
+		this.setTipo(tipo);
+		this.setSenha(senha);
 	}
 	
 	public int isStatus() {
@@ -41,6 +38,14 @@ public class Funcionario extends Pessoa {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	

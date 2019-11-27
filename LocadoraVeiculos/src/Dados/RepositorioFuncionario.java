@@ -6,18 +6,21 @@ import javax.swing.JOptionPane;
 
 import BancodeDados.Conexao;
 import Entidades.Funcionario;
+import Util.UtilFunctions;
 
-public class RepositorioFuncionario {
+public class RepositorioFuncionario implements UtilFunctions{
 	private ArrayList<Funcionario> funcionarios;
-	Funcionario funcionario;
+	private Funcionario funcionario;
 	
 	public RepositorioFuncionario() {
-		funcionarios = new ArrayList<Funcionario>();
+		this.funcionarios = new ArrayList<Funcionario>();
 	}
 	
-	public void getAllFuncionarios() {
+
+	@Override
+	public void getAll() {
 		funcionarios.clear();
-		String sql = "SELECT * FROM usuario";
+		String sql = "SELECT * FROM funcionario";
 		Conexao.getInstance().buscarSQL(sql);
 		try {
 			while (Conexao.getInstance().getResultset().next()) {
@@ -31,12 +34,13 @@ public class RepositorioFuncionario {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	public void findFuncionario(String cpf) {
+
+	@Override
+	public void find(String cpf) {
 		try {
 			if (cpf != null && !cpf.trim().equals("")) {
 				funcionarios.clear();
-				String sql = "SELECT * FROM usuario WHERE cpf = '" + cpf + "'";
+				String sql = "SELECT * FROM funcionario WHERE cpf = '" + cpf + "'";
 				Conexao.getInstance().buscarSQL(sql);
 				while (Conexao.getInstance().getResultset().next()) {
 					funcionario = new Funcionario(Conexao.getInstance().getResultset().getString("nome"), Conexao.getInstance().getResultset().getString("cpf"),
@@ -50,7 +54,7 @@ public class RepositorioFuncionario {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 		
-		Conexao.getInstance().setResultset(null);
+		Conexao.getInstance().setResultset(null);	
 	}
 	
 	public boolean verificarSeExiste(Funcionario funcionario) {
@@ -82,4 +86,5 @@ public class RepositorioFuncionario {
 			}
 		}
 	}
+
 }

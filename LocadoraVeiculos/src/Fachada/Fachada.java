@@ -2,18 +2,21 @@ package Fachada;
 
 import javax.swing.JOptionPane;
 
+import Negocio.ControleCliente;
 import Negocio.ControleFuncionario;
 import Negocio.ControlePessoa;
 
 public class Fachada {
 	private ControlePessoa pessoa;     
 	private ControleFuncionario funcionario;
+	private ControleCliente cliente;
 
 	static Fachada instance;
 
 	public Fachada() {
 		pessoa = new ControlePessoa();
 		funcionario = new ControleFuncionario();
+		cliente = new ControleCliente();
 	}
 
 	public static Fachada getInstance() {
@@ -32,7 +35,12 @@ public class Fachada {
 				JOptionPane.showMessageDialog(null, "Parametros obrigatorios nao preenchidos", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			
+			boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
+			if (inserido == true) {
+				this.cliente.inserirCliente(nome, cpf, telefone);
+			} else {
+				JOptionPane.showMessageDialog(null, "Parametros obrigatorios nao preenchidos", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 }

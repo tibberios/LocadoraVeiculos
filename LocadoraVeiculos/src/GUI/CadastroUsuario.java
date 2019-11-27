@@ -151,6 +151,7 @@ public class CadastroUsuario extends JFrame {
 					if (!inputEmail.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(null, "O email será desconsiderado por ser um cliente!", "Erro", JOptionPane.WARNING_MESSAGE);
 					}
+					//gambiarra o email
 					fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "cliente");
 				} else {
 					JOptionPane.showMessageDialog(null, "Selecione o tipo do usuário!", "Erro", JOptionPane.WARNING_MESSAGE);

@@ -3,30 +3,20 @@ package Util;
 public class Pessoa {
 	private String cpf;
 	private String nome;
-	private String senha;
 	private String telefone;
 
-	public Pessoa (String nome, String cpf, String senha , String telefone) {
+	public Pessoa (String nome, String cpf, String telefone) {
 		this.setNome(nome);
 		this.setCpf(cpf);		
-		this.setSenha(senha);
 		this.setTelefone(telefone);
 	}
-
+	
 	public String getCpf() {
 		return cpf;
 	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public String getTelefone() {

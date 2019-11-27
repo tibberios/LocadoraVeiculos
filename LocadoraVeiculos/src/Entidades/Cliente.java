@@ -5,17 +5,18 @@ import java.io.Serializable;
 import Util.Pessoa;
 
 public class Cliente extends Pessoa implements Serializable{
-	private String status = "Ativo";
+	private int status;
 
-	public Cliente(String nome, String cpf, String senha , String telefone) {
-		super(nome, cpf, senha ,telefone);
+	public Cliente(String nome, String cpf, String telefone, int ativo) {
+		super(nome, cpf, telefone);
+		this.status = ativo;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

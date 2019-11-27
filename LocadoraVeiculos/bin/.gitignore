@@ -1,11 +1,4 @@
-/.classpath
-/.project
-/BancodeDados/
+/Util/
 /Dados/
 /Entidades/
-/Fachada/
 /GUI/
-/Negocio/
-/Teste/
-/Util/
-/mysql-connector-java-5.1.16-bin.jar

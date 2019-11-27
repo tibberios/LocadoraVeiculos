@@ -1,8 +1,5 @@
 package Negocio;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 import Dados.RepositorioFuncionario;
 import Entidades.Funcionario;
 
