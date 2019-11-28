@@ -81,5 +81,47 @@ public class RepositorioCliente implements UtilFunctions {
 			}
 		}
 	}
-	
+
+	@Override
+	public void remove(String cpf) {
+		try {
+			if (cpf != null && !cpf.trim().equals("")) {
+				String sql = "UPDATE cliente SET ativo = 0 WHERE cpf = " + cpf;
+
+				int rowInsered = Conexao.getInstance().executaSQL(sql);
+				if (rowInsered == 200) {
+					JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
+				}				
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void update(String cpf, String nome, String telefone) {
+		try {
+			String sql = "UPDATE cliente SET";
+			int aux = 0;
+			
+			if (nome != null && !nome.trim().equals("")) {
+				sql += " nome = '" + nome + "'";
+				aux = 1;
+			}
+
+			if (telefone != null && !telefone.trim().equals("")) {
+				if (aux == 1) {
+					sql += ", telefone = '" + telefone + "'";
+				} else {
+					aux = 1;
+					sql += " telefone = '" + telefone + "'";
+				}
+			}
+
+			sql += " WHERE cpf = '" + cpf + "'";
+			Conexao.getInstance().executaSQL(sql);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
 }

@@ -100,4 +100,10 @@ public class RepositorioVeiculo implements UtilFunctions{
 		Conexao.getInstance().setResultset(null);	
 	}
 
+	@Override
+	public void remove(String string_to_remove) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

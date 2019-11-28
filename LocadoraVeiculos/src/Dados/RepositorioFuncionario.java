@@ -11,11 +11,11 @@ import Util.UtilFunctions;
 public class RepositorioFuncionario implements UtilFunctions{
 	private ArrayList<Funcionario> funcionarios;
 	private Funcionario funcionario;
-	
+
 	public RepositorioFuncionario() {
 		this.funcionarios = new ArrayList<Funcionario>();
 	}
-	
+
 
 	@Override
 	public void getAll() {
@@ -53,10 +53,10 @@ public class RepositorioFuncionario implements UtilFunctions{
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 		Conexao.getInstance().setResultset(null);	
 	}
-	
+
 	public boolean verificarSeExiste(Funcionario funcionario) {
 		this.find(funcionario.getCpf());
 		for (Funcionario func: funcionarios) {
@@ -76,7 +76,7 @@ public class RepositorioFuncionario implements UtilFunctions{
 				if (!funcionario.getNome().isEmpty() && !funcionario.getCpf().isEmpty() && !funcionario.getSenha().isEmpty() && !funcionario.getTelefone().isEmpty() && !funcionario.getEmail().isEmpty()) {
 					sql += "'" + funcionario.getNome() + "', " + "'" + funcionario.getCpf() + "', " + "'" + funcionario.getSenha() + "', " + "'" + funcionario.getTelefone() + "', " + "'" + funcionario.getEmail() + "')";
 				}
-				
+
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					this.funcionarios.add(funcionario);
@@ -85,6 +85,64 @@ public class RepositorioFuncionario implements UtilFunctions{
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
+		}
+	}
+
+	@Override
+	public void remove(String cpf) {
+		try {
+			if (cpf != null && !cpf.trim().equals("")) {
+				String sql = "UPDATE funcionario SET ativo = 0 WHERE cpf = " + cpf;
+
+				int rowInsered = Conexao.getInstance().executaSQL(sql);
+				if (rowInsered == 200) {
+					JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso!");
+				}				
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void update(String cpf, String nome, String senha, String telefone, String email) {
+		try {
+			String sql = "UPDATE funcionario SET";
+			int aux = 0;
+			
+			if (nome != null && !nome.trim().equals("")) {
+				sql += " nome = '" + nome + "'";
+				aux = 1;
+			}
+
+			if (telefone != null && !telefone.trim().equals("")) {
+				if (aux == 1) {
+					sql += ", telefone = '" + telefone + "'";
+				} else {
+					aux = 1;
+					sql += " telefone = '" + telefone + "'";
+				}
+			}
+
+			if (email != null && !email.trim().equals("")) {
+				if (aux == 1) {
+					sql += ", email = '" + email + "'";
+				} else {
+					sql += " email = '" + email + "'";
+				}
+			}
+			
+			if (senha != null && !senha.trim().equals("")) {
+				if (aux == 1) {
+					sql += ", senha = '" + senha + "'";
+				} else {
+					sql += " senha = '" + senha + "'";
+				}
+			}
+			
+			sql += " WHERE cpf = '" + cpf + "'";
+			Conexao.getInstance().executaSQL(sql);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

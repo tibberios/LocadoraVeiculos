@@ -91,19 +91,25 @@ public class ControlePessoa {
 	}
 	
 	public boolean validarDadosPessoa(String nome, String cpf, String senha, String telefone, String email) {
-		boolean validar_nome = this.validarNome(nome);
-		boolean validar_cpf = this.validarCPF(cpf);
-		boolean validar_senha = this.validarSenha(senha);
-		boolean validar_telefone = this.validarTelefone(telefone);
-		//gambiarra
-		boolean validar_email = true;
-		if (!email.equals("cliente")) {
-			validar_email = this.validarEmail(email);
-		}
+		boolean retornar = false;
 		
-		if (validar_nome == true && validar_cpf == true && validar_senha == true && validar_telefone == true && validar_email == true) {
-			return true;
+		if (nome != null && !nome.trim().equals("")) {
+			retornar = this.validarNome(nome);
 		}
-		return false;
+		if (cpf != null && !cpf.trim().equals("")) {
+			retornar = this.validarCPF(cpf);
+		}
+		if (senha != null && !senha.trim().equals("")) {
+			retornar = this.validarSenha(senha);
+		}
+		if (telefone != null && !telefone.trim().equals("")) {
+			retornar = this.validarTelefone(telefone);
+		}
+		//gambiarra
+		if (email != null && !email.trim().equals("") && !email.equals("cliente")) {
+			retornar = this.validarEmail(email);
+		}
+
+		return retornar;
 	}
 }

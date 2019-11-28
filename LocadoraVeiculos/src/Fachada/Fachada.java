@@ -27,21 +27,48 @@ public class Fachada {
 		return Fachada.instance;
 	}
 
-	public void inserirPessoa (String nome, String cpf, String senha, String telefone, String email) throws FormatoDadosException {
-		if (email != null || !email.isEmpty() && !email.equals("cliente")) {
-			boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
-			if (inserido == true) {
-				this.funcionario.inserirFuncionario(nome, cpf, senha, telefone, email);
+	public void inserirPessoa (String nome, String cpf, String senha, String telefone, String email, String tipo_de_insercao) throws FormatoDadosException {
+		if (tipo_de_insercao.equals("inserir")) {
+			if (email != null || !email.isEmpty() && !email.equals("cliente")) {
+				boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
+				if (inserido == true) {
+					this.funcionario.inserirFuncionario(nome, cpf, senha, telefone, email);
+				} else {
+					throw new FormatoDadosException();
+				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Parametros obrigatorios nao preenchidos", "Erro", JOptionPane.ERROR_MESSAGE);
+				boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, null, telefone, null);
+				if (inserido == true) {
+					this.cliente.inserirCliente(nome, cpf, telefone);
+				} else {
+					throw new FormatoDadosException();
+				}
 			}
-		} else {
-			boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
-			if (inserido == true) {
-				this.cliente.inserirCliente(nome, cpf, telefone);
+		} else if (tipo_de_insercao.equals("atualizar")) {
+			if (email != null || !email.isEmpty() && !email.equals("cliente")) {
+				boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
+				if (inserido == true) {
+					this.funcionario.atualizarFuncionario(cpf, nome, senha, telefone, email);
+				} else {
+					throw new FormatoDadosException();
+				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Parametros obrigatorios nao preenchidos", "Erro", JOptionPane.ERROR_MESSAGE);
+				boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, null, telefone, null);
+				if (inserido == true) {
+					this.cliente.atualizarCliente(nome, cpf, telefone);
+				} else {
+					throw new FormatoDadosException();
+				}
 			}
 		}
 	}
+	
+	public void removerPessoa(String cpf, String tipo_de_insercao) {
+		if (tipo_de_insercao.equals("funcionario")) {
+			this.funcionario.removerFuncionario(cpf);
+		} else if (tipo_de_insercao.equals("atualizar")) {
+			this.funcionario.removerFuncionario(cpf);
+		}
+	}
+
 }
