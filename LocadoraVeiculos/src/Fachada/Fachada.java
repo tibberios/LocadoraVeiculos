@@ -2,6 +2,7 @@ package Fachada;
 
 import javax.swing.JOptionPane;
 
+import Excecoes.FormatoDadosException;
 import Negocio.ControleCliente;
 import Negocio.ControleFuncionario;
 import Negocio.ControlePessoa;
@@ -26,7 +27,7 @@ public class Fachada {
 		return Fachada.instance;
 	}
 
-	public void inserirPessoa (String nome, String cpf, String senha, String telefone, String email) {
+	public void inserirPessoa (String nome, String cpf, String senha, String telefone, String email) throws FormatoDadosException {
 		if (email != null || !email.isEmpty() && !email.equals("cliente")) {
 			boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
 			if (inserido == true) {

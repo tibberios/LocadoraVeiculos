@@ -13,7 +13,7 @@ public class Main {
 		Veiculo veiculo = new Veiculo("PDA-0715", "Nissan", "HB20", "Branco", 2015, 200000.0);
 		
 		Conexao.getInstance().conectar();
-		repositorio.inserirVeiculo(veiculo);
+		//repositorio.inserirVeiculo(veiculo);
 		Conexao.getInstance().desconectar();
 		
 		

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Excecoes.FormatoDadosException;
 import Fachada.Fachada;
 
 import javax.swing.JLabel;
@@ -28,6 +29,13 @@ public class CadastroUsuario extends JFrame {
 	private JTextField inputTelefone;
 	private JTextField inputSenha;
 	private JTextField inputEmail;
+	public static CadastroUsuario instance;
+	public static CadastroUsuario getInstace() {
+		if (CadastroUsuario.instance == null) {
+			return CadastroUsuario.instance = new CadastroUsuario();
+		}
+		return CadastroUsuario.instance;
+	}
 
 	/**
 	 * Launch the application.
@@ -110,6 +118,12 @@ public class CadastroUsuario extends JFrame {
 		panel.add(btnSalvar);
 		
 		JButton btnVoltar = new JButton("< Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaDeGerenciamento.getInstace().setVisible(true);
+				dispose();
+			}
+		});
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVoltar.setBounds(10, 174, 89, 23);
 		panel.add(btnVoltar);
@@ -146,13 +160,23 @@ public class CadastroUsuario extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnFunc.isSelected() == true) {
-					fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), inputEmail.getText());
+					try {
+						fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), inputEmail.getText());
+					} catch (FormatoDadosException e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e.toString(), "Erro", JOptionPane.ERROR_MESSAGE);
+					}
 				} else if (rdbtnCliente.isSelected() == true) {
 					if (!inputEmail.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(null, "O email será desconsiderado por ser um cliente!", "Erro", JOptionPane.WARNING_MESSAGE);
 					}
 					//gambiarra o email
-					fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "cliente");
+					try {
+						fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "cliente");
+					} catch (FormatoDadosException e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e.toString(), "Erro", JOptionPane.ERROR_MESSAGE);
+					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Selecione o tipo do usuário!", "Erro", JOptionPane.WARNING_MESSAGE);
 				}

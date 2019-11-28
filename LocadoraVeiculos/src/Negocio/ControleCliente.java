@@ -3,7 +3,7 @@ package Negocio;
 import Dados.RepositorioCliente;
 import Entidades.Cliente;
 
-public class ControleCliente {
+public class ControleCliente  {
 	private RepositorioCliente repositorio;
 	Cliente Cliente;
 
@@ -12,6 +12,7 @@ public class ControleCliente {
 	}
 
 	public void inserirCliente(String nome, String cpf, String telefone) {
+
 		Cliente = new Cliente(nome, cpf, telefone, 1);	
 		repositorio.inserirCliente(Cliente);
 	}
