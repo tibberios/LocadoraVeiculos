@@ -6,16 +6,29 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField inputEmail;
 	private JTextField inputSenha;
+	static int funcADM = -1;
+	public static Login instance;
+	public static Login getInstace() {
+		if (Login.instance == null) {
+			return Login.instance = new Login();
+		}
+		return Login.instance;
+	}
 
 	/**
 	 * Launch the application.
@@ -70,6 +83,22 @@ public class Login extends JFrame {
 		inputSenha.setColumns(10);
 		
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+//				if() {
+				//ADM
+//				funcADM = 0;
+//				TelaDeGerenciamento.getInstace().setVisible(true);
+//				dispose();
+//			}else {
+				//FUNCIONARIO
+				//funcADM = 1;
+//				TelaDeGerenciamento.getInstace().setVisible(true);
+//				dispose();
+//			}
+			
+			}
+		});
 		btnEntrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEntrar.setBounds(315, 147, 89, 23);
 		panel.add(btnEntrar);
@@ -78,5 +107,8 @@ public class Login extends JFrame {
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblLogin.setBounds(188, 28, 90, 30);
 		contentPane.add(lblLogin);
+		
+
+	
 	}
 }

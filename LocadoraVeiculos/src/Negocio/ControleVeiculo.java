@@ -54,7 +54,7 @@ public void inserirVeiculo(String placa , String marca , String modelo , String 
 	// ifs 
 	
 	veiculo = new Veiculo(placa,marca,modelo,cor,ano,preco);
-	repositorio.inserirVeiculo(veiculo);
+	//repositorio.inserirVeiculo(veiculo);
 }
 
 }
