@@ -17,6 +17,36 @@ public class RepositorioFuncionario implements UtilFunctions{
 	}
 
 
+	
+	
+	public ArrayList<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+
+
+
+	public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
+
+
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+
+
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+
+
+
 	@Override
 	public void getAll() {
 		funcionarios.clear();

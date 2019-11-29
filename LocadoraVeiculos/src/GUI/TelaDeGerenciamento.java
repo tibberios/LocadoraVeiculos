@@ -32,12 +32,12 @@ public class TelaDeGerenciamento extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	public void isFuncADM() {
-		if(Login.funcADM == 0) {
+		if(Login.funcADM == 1) {
 			rdbtnVeiculo.setEnabled(true);
 			rdbtnFuncionario.setEnabled(true);
 			rdbtnCliente.setEnabled(true);
 			
-		}else if(Login.funcADM == 1){
+		}else if(Login.funcADM == 0){
 			rdbtnVeiculo.setEnabled(true);
 			rdbtnCliente.setEnabled(true);
 		}
@@ -191,6 +191,17 @@ public class TelaDeGerenciamento extends JFrame {
 		btnVoltar.setBounds(346, 225, 91, 23);
 		contentPane.add(btnVoltar);
 		
+		JButton btnVerLocacao = new JButton("VerLoca\u00E7\u00F5es");
+		btnVerLocacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VerLocacoes.getInstace().setVisible(true);
+				dispose();
+			}
+		});
+		btnVerLocacao.setBounds(169, 115, 109, 23);
+		contentPane.add(btnVerLocacao);
+		btnVerLocacao.setEnabled(false);
+		
 		isFuncADM();
 		rdbtnVeiculo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -200,6 +211,7 @@ public class TelaDeGerenciamento extends JFrame {
 				btnBuscar.setEnabled(true);
 				btnAtualizar.setEnabled(true);
 				btnFazerLocacao.setEnabled(false);
+				btnVerLocacao.setEnabled(false);
 			}
 		});
 		
@@ -211,6 +223,7 @@ public class TelaDeGerenciamento extends JFrame {
 				btnBuscar.setEnabled(true);
 				btnAtualizar.setEnabled(true);
 				btnFazerLocacao.setEnabled(false);
+				btnVerLocacao.setEnabled(false);
 			}
 		});
 		
@@ -222,6 +235,7 @@ public class TelaDeGerenciamento extends JFrame {
 				btnBuscar.setEnabled(true);
 				btnAtualizar.setEnabled(true);
 				btnFazerLocacao.setEnabled(true);
+				btnVerLocacao.setEnabled(true);
 			}
 		});
 	}

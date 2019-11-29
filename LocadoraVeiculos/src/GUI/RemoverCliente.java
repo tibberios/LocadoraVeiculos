@@ -75,6 +75,11 @@ public class RemoverCliente extends JFrame {
 		textArea.setEditable(false);
 		
 		JButton btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnRemover.setBounds(172, 250, 91, 23);
 		contentPane.add(btnRemover);
 		

@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import Fachada.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -91,6 +94,11 @@ public class AtualizarCliente extends JFrame {
 		inputTelefone.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Atualizar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Fachada.getInstance().getCliente().atualizarCliente((String)inputCpf.getText(), (String)inputNome.getText(), (String)inputTelefone.getText());
+			}
+		});
 
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSalvar.setBounds(278, 117, 89, 23);

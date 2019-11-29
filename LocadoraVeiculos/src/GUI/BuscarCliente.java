@@ -66,6 +66,7 @@ public class BuscarCliente extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnBuscar.setBounds(174, 85, 91, 23);

@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import Fachada.Fachada;
+
 import java.awt.Color;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -105,6 +108,11 @@ public class AtualizarFuncionario extends JFrame {
 		inputSenha.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Atualizar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Fachada.getInstance().getFuncionario().atualizarFuncionario((String)inputCpf.getText(), (String)inputNome.getText(), (String)inputSenha.getText(), (String)inputTelefone.getText(), (String)inputEmail.getText());
+			}
+		});
 
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSalvar.setBounds(278, 147, 89, 23);
