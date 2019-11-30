@@ -1,11 +1,11 @@
 package Dados;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
 import BancodeDados.Conexao;
-import Entidades.Funcionario;
 import Entidades.Veiculo;
 import Excecoes.PlacaExisteExeception;
 import Util.UtilFunctions;
@@ -32,7 +32,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 
 	public void inserirVeiculo(Veiculo veiculo) throws PlacaExisteExeception {
 		String sql = "INSERT INTO veiculo(placa, marca, modelo, cor, km_rodados, ano, preco) VALUES (";
-	
+
 		if(this.verifarSeexiste(veiculo)==false) {
 			sql += "'"+veiculo.getPlaca()+"', ";
 			sql += "'"+veiculo.getMarca()+"', ";
@@ -41,7 +41,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 			sql += "'"+veiculo.getKilometragem()+"', ";
 			sql += "'"+veiculo.getAno()+"', ";
 			sql += "'"+veiculo.getPreco()+"')";
-		Conexao.getInstance().executaSQL(sql);
+			Conexao.getInstance().executaSQL(sql);
 		}else {
 			throw new PlacaExisteExeception (veiculo.getPlaca());
 		}
@@ -101,9 +101,56 @@ public class RepositorioVeiculo implements UtilFunctions{
 	}
 
 	@Override
-	public void remove(String string_to_remove) {
-		// TODO Auto-generated method stub
-		
+	public void remove(String placa) {
+		try {
+			if (placa != null && placa.trim().equals("")){
+				String sql = "UPDATE cliente SET ativo = 0 WHERE cpf = "+placa;
+				int rowInsered = Conexao.getInstance().executaSQL(sql);
+				if (rowInsered == 200) {
+					JOptionPane.showMessageDialog(null, "Veiculo desativado com sucesso!");
+				}
+			}
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
+	public void update(String marca,String modelo,String cor,int km_rodados,int ano,double preco) {
+		try {
+			String sql = "UPDATE cliente SET";
+			int aux = 0;
+			
+			if(marca != null && marca.trim().equals("")) {
+				sql += " marca = '" + marca + "'";
+				aux = 1;
+			}
+			if(modelo!= null && modelo.trim().equals("")) {
+				sql+= " modelo = '" + modelo + "'";
+			}
+			if(cor != null && cor.trim().equals("")) {
+				sql+= " cor = '" + cor + "'";
+			}
+			
+			if(km_rodados > 0) {
+				sql+= " km_rodados = '" + km_rodados + "'";
+			}
+			
+			if(ano !=0 ) {
+				
+			}
+			
+		}catch (Exception e) {
+			
+		}
+
+	}
+
+
+
+
+
+
+
 }
+
+
