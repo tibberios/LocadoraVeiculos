@@ -17,6 +17,7 @@ import java.awt.Color;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class AtualizarFuncionario extends JFrame {
 	
@@ -62,7 +63,7 @@ public class AtualizarFuncionario extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(28, 90, 377, 172);
+		panel.setBounds(28, 79, 377, 172);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -108,6 +109,7 @@ public class AtualizarFuncionario extends JFrame {
 		inputSenha.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Atualizar");
+		btnSalvar.setBackground(new Color(50, 205, 50));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Fachada.getInstance().getFuncionario().atualizarFuncionario((String)inputCpf.getText(), (String)inputNome.getText(), (String)inputSenha.getText(), (String)inputTelefone.getText(), (String)inputEmail.getText());
@@ -119,6 +121,7 @@ public class AtualizarFuncionario extends JFrame {
 		panel.add(btnSalvar);
 		
 		JButton btnVoltar = new JButton("< Voltar");
+		btnVoltar.setBackground(SystemColor.textHighlight);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
@@ -144,7 +147,8 @@ public class AtualizarFuncionario extends JFrame {
 		contentPane.add(comboBox);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(174, 65, 91, 23);
+		btnBuscar.setBackground(SystemColor.textHighlight);
+		btnBuscar.setBounds(168, 56, 91, 23);
 		contentPane.add(btnBuscar);
 		
 		JLabel lblAtualizarFuncionario = new JLabel("Atualizar Funcionario");

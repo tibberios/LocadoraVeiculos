@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class BuscarCliente extends JFrame {
 
@@ -60,10 +61,11 @@ public class BuscarCliente extends JFrame {
 		contentPane.add(lblBuscarCliente);
 		
 		
-		comboBoxClientes.setBounds(68, 52, 324, 22);
+		comboBoxClientes.setBounds(53, 52, 351, 22);
 		contentPane.add(comboBoxClientes);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -81,13 +83,14 @@ public class BuscarCliente extends JFrame {
 		textArea.setEditable(false);
 		
 		JButton button = new JButton("Voltar");
+		button.setBackground(SystemColor.textHighlight);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
 				dispose();
 			}
 		});
-		button.setBounds(341, 250, 91, 23);
+		button.setBounds(313, 239, 91, 23);
 		contentPane.add(button);
 	}
 }

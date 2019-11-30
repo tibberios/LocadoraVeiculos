@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
 
 public class RemoverFuncionario extends JFrame {
 
@@ -53,15 +54,18 @@ public class RemoverFuncionario extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblBuscarCliente = new JLabel("Remover Funcionario");
-		lblBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblBuscarCliente.setBounds(145, 11, 185, 22);
+		lblBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 18));
 		contentPane.add(lblBuscarCliente);
-		
-		
-		comboBoxFuncionarios.setBounds(68, 52, 324, 22);
+		comboBoxFuncionarios.setBounds(54, 52, 351, 22);
 		contentPane.add(comboBoxFuncionarios);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnBuscar.setBackground(UIManager.getColor("TextPane.selectionBackground"));
 		btnBuscar.setBounds(172, 85, 91, 23);
 		contentPane.add(btnBuscar);
 		
@@ -74,17 +78,19 @@ public class RemoverFuncionario extends JFrame {
 		textArea.setEditable(false);
 		
 		JButton btnRemover = new JButton("Remover");
-		btnRemover.setBounds(172, 250, 91, 23);
+		btnRemover.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
+		btnRemover.setBounds(52, 239, 91, 23);
 		contentPane.add(btnRemover);
 		
 		JButton button = new JButton("Voltar");
+		button.setBackground(UIManager.getColor("TextPane.selectionBackground"));
+		button.setBounds(314, 239, 91, 23);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
 				dispose();
 			}
 		});
-		button.setBounds(341, 250, 91, 23);
 		contentPane.add(button);
 	
 	}

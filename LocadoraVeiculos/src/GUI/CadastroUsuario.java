@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class CadastroUsuario extends JFrame {
 
@@ -112,12 +113,14 @@ public class CadastroUsuario extends JFrame {
 		inputSenha.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBackground(new Color(50, 205, 50));
 
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSalvar.setBounds(278, 172, 89, 23);
 		panel.add(btnSalvar);
 		
 		JButton btnVoltar = new JButton("< Voltar");
+		btnVoltar.setBackground(SystemColor.textHighlight);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);

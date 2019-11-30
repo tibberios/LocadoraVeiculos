@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
 
 public class RemoverCliente extends JFrame {
 
@@ -59,10 +60,11 @@ public class RemoverCliente extends JFrame {
 		contentPane.add(lblBuscarCliente);
 		
 		
-		comboBoxClientes.setBounds(68, 52, 324, 22);
+		comboBoxClientes.setBounds(54, 52, 351, 22);
 		contentPane.add(comboBoxClientes);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(UIManager.getColor("TextPane.selectionBackground"));
 		btnBuscar.setBounds(172, 85, 91, 23);
 		contentPane.add(btnBuscar);
 		
@@ -75,22 +77,24 @@ public class RemoverCliente extends JFrame {
 		textArea.setEditable(false);
 		
 		JButton btnRemover = new JButton("Remover");
+		btnRemover.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
-		btnRemover.setBounds(172, 250, 91, 23);
+		btnRemover.setBounds(54, 239, 91, 23);
 		contentPane.add(btnRemover);
 		
 		JButton button = new JButton("Voltar");
+		button.setBackground(UIManager.getColor("TextPane.selectionBackground"));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
 				dispose();
 			}
 		});
-		button.setBounds(341, 250, 91, 23);
+		button.setBounds(314, 239, 91, 23);
 		contentPane.add(button);
 	
 	}

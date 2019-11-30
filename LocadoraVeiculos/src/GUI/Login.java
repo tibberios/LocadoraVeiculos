@@ -20,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class Login extends JFrame {
 
@@ -64,6 +66,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(192, 192, 192));
 		panel.setBounds(10, 70, 414, 181);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -89,6 +92,7 @@ public class Login extends JFrame {
 		inputSenha.setColumns(10);
 
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.setBackground(SystemColor.textHighlight);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -118,8 +122,8 @@ public class Login extends JFrame {
 		panel.add(btnEntrar);
 
 		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblLogin.setBounds(188, 28, 90, 30);
+		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblLogin.setBounds(176, 29, 90, 30);
 		contentPane.add(lblLogin);
 
 

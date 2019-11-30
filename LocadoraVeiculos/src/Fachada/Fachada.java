@@ -16,12 +16,12 @@ public class Fachada {
 	private ControleFuncionario funcionario;
 	private ControleCliente cliente;
 
-
 	public Fachada() {
 		pessoa = new ControlePessoa();
 		funcionario = new ControleFuncionario();
 		cliente = new ControleCliente();
 	}
+	
 	public static Fachada instance;
 	public static Fachada getInstance() {
 		if(Fachada.instance == null) {
@@ -29,8 +29,6 @@ public class Fachada {
 		}
 		return Fachada.instance;
 	}
-
-
 
 	public ControlePessoa getPessoa() {
 		return pessoa;

@@ -15,6 +15,8 @@ import Fachada.Fachada;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class AtualizarCliente extends JFrame {
 
@@ -58,7 +60,7 @@ public class AtualizarCliente extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(28, 113, 377, 149);
+		panel.setBounds(28, 99, 377, 149);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -94,6 +96,7 @@ public class AtualizarCliente extends JFrame {
 		inputTelefone.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Atualizar");
+		btnSalvar.setBackground(new Color(50, 205, 50));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Fachada.getInstance().getCliente().atualizarCliente((String)inputCpf.getText(), (String)inputNome.getText(), (String)inputTelefone.getText());
@@ -105,6 +108,7 @@ public class AtualizarCliente extends JFrame {
 		panel.add(btnSalvar);
 		
 		JButton btnVoltar = new JButton("< Voltar");
+		btnVoltar.setBackground(SystemColor.textHighlight);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
@@ -120,6 +124,7 @@ public class AtualizarCliente extends JFrame {
 		contentPane.add(comboBox);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.setBounds(174, 65, 91, 23);
 		contentPane.add(btnBuscar);
 		

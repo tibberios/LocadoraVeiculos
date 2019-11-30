@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class Cadastro_Veiculo extends JFrame {
 
@@ -58,7 +60,7 @@ public class Cadastro_Veiculo extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBounds(39, 37, 377, 225);
+		panel.setBounds(39, 37, 377, 214);
 		getContentPane().add(panel);
 		
 		JLabel lblPlaca = new JLabel("Placa");
@@ -102,6 +104,7 @@ public class Cadastro_Veiculo extends JFrame {
 		panel.add(textCor);
 		
 		JButton button_1 = new JButton("< Voltar");
+		button_1.setBackground(SystemColor.textHighlight);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
@@ -123,6 +126,7 @@ public class Cadastro_Veiculo extends JFrame {
 		panel.add(textAno);
 		
 		JButton btnIncluirVeiculo = new JButton("Incluir Veiculo");
+		btnIncluirVeiculo.setBackground(new Color(50, 205, 50));
 		btnIncluirVeiculo.setBounds(243, 191, 124, 23);
 		panel.add(btnIncluirVeiculo);
 		

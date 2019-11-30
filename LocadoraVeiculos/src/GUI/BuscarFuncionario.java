@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class BuscarFuncionario extends JFrame {
 
@@ -60,10 +61,11 @@ public class BuscarFuncionario extends JFrame {
 		contentPane.add(lblBuscarCliente);
 		
 		
-		comboBoxFuncionarios.setBounds(68, 52, 324, 22);
+		comboBoxFuncionarios.setBounds(53, 52, 351, 22);
 		contentPane.add(comboBoxFuncionarios);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.setBounds(171, 85, 91, 23);
 		contentPane.add(btnBuscar);
 		
@@ -76,13 +78,14 @@ public class BuscarFuncionario extends JFrame {
 		textArea.setEditable(false);
 		
 		JButton button = new JButton("Voltar");
+		button.setBackground(SystemColor.textHighlight);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
 				dispose();
 			}
 		});
-		button.setBounds(341, 250, 91, 23);
+		button.setBounds(313, 239, 91, 23);
 		contentPane.add(button);
 	}
 

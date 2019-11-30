@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class AtualizarVeiculo extends JFrame {
 
@@ -58,7 +60,7 @@ public class AtualizarVeiculo extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBounds(39, 89, 377, 173);
+		panel.setBounds(50, 89, 347, 173);
 		getContentPane().add(panel);
 		
 		JLabel lblMarca = new JLabel("Marca");
@@ -92,6 +94,7 @@ public class AtualizarVeiculo extends JFrame {
 		panel.add(textCor);
 		
 		JButton button_1 = new JButton("< Voltar");
+		button_1.setBackground(SystemColor.textHighlight);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
@@ -113,7 +116,8 @@ public class AtualizarVeiculo extends JFrame {
 		panel.add(textAno);
 		
 		JButton btnAtualizarVeiculo = new JButton("Atualizar Veiculo");
-		btnAtualizarVeiculo.setBounds(243, 146, 124, 23);
+		btnAtualizarVeiculo.setBackground(new Color(50, 205, 50));
+		btnAtualizarVeiculo.setBounds(201, 146, 124, 23);
 		panel.add(btnAtualizarVeiculo);
 		
 		JLabel lblPreco = new JLabel("Pre\u00E7o");
@@ -136,7 +140,8 @@ public class AtualizarVeiculo extends JFrame {
 		contentPane.add(comboBoxVeiculos);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(183, 66, 91, 23);
+		btnBuscar.setBackground(SystemColor.textHighlight);
+		btnBuscar.setBounds(183, 66, 91, 22);
 		contentPane.add(btnBuscar);
 	}
 

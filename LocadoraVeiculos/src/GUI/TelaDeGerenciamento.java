@@ -15,6 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class TelaDeGerenciamento extends JFrame {
 
@@ -71,19 +73,19 @@ public class TelaDeGerenciamento extends JFrame {
 		
 		
 		buttonGroup.add(rdbtnVeiculo);
-		rdbtnVeiculo.setBounds(31, 225, 109, 23);
+		rdbtnVeiculo.setBounds(31, 225, 66, 23);
 		contentPane.add(rdbtnVeiculo);
 		rdbtnVeiculo.setEnabled(false);
 		
 		
 		buttonGroup.add(rdbtnFuncionario);
-		rdbtnFuncionario.setBounds(148, 225, 109, 23);
+		rdbtnFuncionario.setBounds(117, 225, 81, 23);
 		contentPane.add(rdbtnFuncionario);
 		rdbtnFuncionario.setEnabled(false);
 		
 		
 		buttonGroup.add(rdbtnCliente);
-		rdbtnCliente.setBounds(265, 225, 75, 23);
+		rdbtnCliente.setBounds(219, 225, 59, 23);
 		contentPane.add(rdbtnCliente);
 		rdbtnCliente.setEnabled(false);
 		
@@ -102,7 +104,7 @@ public class TelaDeGerenciamento extends JFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(64, 76, 91, 23);
+		btnCadastrar.setBounds(31, 76, 91, 23);
 		contentPane.add(btnCadastrar);
 		btnCadastrar.setEnabled(false);
 		
@@ -121,7 +123,7 @@ public class TelaDeGerenciamento extends JFrame {
 				}
 			}
 		});
-		btnRemover.setBounds(283, 76, 91, 23);
+		btnRemover.setBounds(143, 76, 91, 23);
 		contentPane.add(btnRemover);
 		btnRemover.setEnabled(false);
 		
@@ -140,7 +142,7 @@ public class TelaDeGerenciamento extends JFrame {
 				}
 			}
 		});
-		btnBuscar.setBounds(64, 146, 91, 23);
+		btnBuscar.setBounds(31, 146, 91, 23);
 		contentPane.add(btnBuscar);
 		btnBuscar.setEnabled(false);
 		
@@ -159,7 +161,7 @@ public class TelaDeGerenciamento extends JFrame {
 					}
 			}
 		});
-		btnAtualizar.setBounds(283, 146, 91, 23);
+		btnAtualizar.setBounds(143, 146, 91, 23);
 		contentPane.add(btnAtualizar);
 		btnAtualizar.setEnabled(false);
 		
@@ -176,11 +178,12 @@ public class TelaDeGerenciamento extends JFrame {
 				
 			}
 		});
-		btnFazerLocacao.setBounds(169, 183, 109, 23);
+		btnFazerLocacao.setBounds(287, 146, 109, 23);
 		contentPane.add(btnFazerLocacao);
 		btnFazerLocacao.setEnabled(false);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBackground(SystemColor.textHighlight);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login.getInstace().setVisible(true);
@@ -188,19 +191,29 @@ public class TelaDeGerenciamento extends JFrame {
 				Login.funcADM = -1;
 			}
 		});
-		btnVoltar.setBounds(346, 225, 91, 23);
+		btnVoltar.setBounds(305, 225, 91, 23);
 		contentPane.add(btnVoltar);
 		
-		JButton btnVerLocacao = new JButton("VerLoca\u00E7\u00F5es");
+		JButton btnVerLocacao = new JButton("Loca\u00E7\u00F5es");
 		btnVerLocacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VerLocacoes.getInstace().setVisible(true);
 				dispose();
 			}
 		});
-		btnVerLocacao.setBounds(169, 115, 109, 23);
+		btnVerLocacao.setBounds(284, 76, 109, 23);
 		contentPane.add(btnVerLocacao);
 		btnVerLocacao.setEnabled(false);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.activeCaption);
+		panel.setBounds(10, 56, 251, 135);
+		contentPane.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.activeCaption);
+		panel_1.setBounds(271, 56, 140, 135);
+		contentPane.add(panel_1);
 		
 		isFuncADM();
 		rdbtnVeiculo.addMouseListener(new MouseAdapter() {

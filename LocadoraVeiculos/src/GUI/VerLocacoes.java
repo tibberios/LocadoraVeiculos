@@ -12,6 +12,9 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
 
 public class VerLocacoes extends JFrame {
 
@@ -65,19 +68,22 @@ public class VerLocacoes extends JFrame {
 		textArea.setEditable(false);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.setBounds(171, 58, 91, 23);
 		contentPane.add(btnBuscar);
 		
 		JButton btnEncerrarLocao = new JButton("Encerrar Loca\u00E7\u00E3o");
-		btnEncerrarLocao.setBounds(309, 239, 123, 23);
+		btnEncerrarLocao.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
+		btnEncerrarLocao.setBounds(277, 219, 127, 23);
 		contentPane.add(btnEncerrarLocao);
 		
 		JLabel lblCodigoDaLocap = new JLabel("Codigo Da Loca\u00E7\u00E3o");
-		lblCodigoDaLocap.setBounds(22, 243, 107, 14);
+		lblCodigoDaLocap.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCodigoDaLocap.setBounds(53, 228, 91, 14);
 		contentPane.add(lblCodigoDaLocap);
 		
 		textCodigoLocacao = new JTextField();
-		textCodigoLocacao.setBounds(139, 240, 123, 20);
+		textCodigoLocacao.setBounds(153, 223, 91, 20);
 		contentPane.add(textCodigoLocacao);
 		textCodigoLocacao.setColumns(10);
 	}
