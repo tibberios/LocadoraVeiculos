@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Entidades.Cliente;
+import Entidades.Funcionario;
+import Fachada.Fachada;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -68,7 +73,10 @@ public class BuscarCliente extends JFrame {
 		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Fachada fachada = new Fachada();
+				for (Cliente c: fachada.getAllClientes()) {
+					comboBoxClientes.addItem(c.getNome());
+				}
 			}
 		});
 		btnBuscar.setBounds(174, 85, 91, 23);

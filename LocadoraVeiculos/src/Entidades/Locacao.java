@@ -2,22 +2,31 @@ package Entidades;
 
 public class Locacao {
 	private String clienteCPF;
-	private float valorTotal;
+	private double valorTotal;
 	private String data_devolucao;
+	private String data_locacao;
 	private String veiculoPlaca;
 	
-	public Locacao(String clienteCPF, float valorTotal, String data_devolucao, String veiculoPlaca) {
+	public Locacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
 		this.setClienteCPF(clienteCPF);
 		this.setValorTotal(valorTotal);
 		this.setData_devolucao(data_devolucao);
 		this.setVeiculoPlaca(veiculoPlaca);
 	}
 
-	public float getValorTotal() {
+	public Locacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_locacao, String data_devolucao) {
+		this.setClienteCPF(clienteCPF);
+		this.setValorTotal(valorTotal);
+		this.setData_devolucao(data_devolucao);
+		this.setVeiculoPlaca(veiculoPlaca);
+		this.setData_locacao(data_locacao);
+	}
+
+	public double getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(float valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 
@@ -43,6 +52,14 @@ public class Locacao {
 
 	public void setVeiculoPlaca(String veiculoPlaca) {
 		this.veiculoPlaca = veiculoPlaca;
+	}
+
+	public String getData_locacao() {
+		return data_locacao;
+	}
+
+	public void setData_locacao(String data_locacao) {
+		this.data_locacao = data_locacao;
 	}
 
 }

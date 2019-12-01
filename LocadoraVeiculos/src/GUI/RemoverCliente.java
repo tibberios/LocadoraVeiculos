@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import Fachada.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
@@ -80,7 +83,7 @@ public class RemoverCliente extends JFrame {
 		btnRemover.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+			
 			}
 		});
 		btnRemover.setBounds(54, 239, 91, 23);

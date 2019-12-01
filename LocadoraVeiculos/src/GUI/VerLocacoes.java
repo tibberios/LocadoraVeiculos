@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import Entidades.Cliente;
+import Fachada.Fachada;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,6 +19,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VerLocacoes extends JFrame {
 
@@ -68,6 +74,10 @@ public class VerLocacoes extends JFrame {
 		textArea.setEditable(false);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.setBounds(171, 58, 91, 23);
 		contentPane.add(btnBuscar);

@@ -42,4 +42,12 @@ public class ControleFuncionario extends ControlePessoa {
 	public void removerFuncionario(String cpf) {
 		repositorio.remove(cpf);
 	}
+	
+	public void getAllFuncionarios() {
+		repositorio.getAll();
+	}
+
+	public void findByName(String nome) {
+		repositorio.findByName(nome);
+	}
 }

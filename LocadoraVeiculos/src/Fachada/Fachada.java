@@ -1,25 +1,32 @@
 package Fachada;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import BancodeDados.Conexao;
+import Entidades.Cliente;
 import Entidades.Funcionario;
+import Entidades.Locacao;
 import Excecoes.EmailNaoCadastradoException;
 import Excecoes.FormatoDadosException;
 import Excecoes.SenhaInvalidaException;
 import Negocio.ControleCliente;
 import Negocio.ControleFuncionario;
+import Negocio.ControleLocacao;
 import Negocio.ControlePessoa;
 
 public class Fachada {
 	private ControlePessoa pessoa;     
 	private ControleFuncionario funcionario;
 	private ControleCliente cliente;
-
+	private ControleLocacao locacao;
+	
 	public Fachada() {
 		pessoa = new ControlePessoa();
 		funcionario = new ControleFuncionario();
 		cliente = new ControleCliente();
+		locacao = new ControleLocacao();
 	}
 	
 	public static Fachada instance;
@@ -60,7 +67,7 @@ public class Fachada {
 
 	public void inserirPessoa (String nome, String cpf, String senha, String telefone, String email, String tipo_de_insercao) throws FormatoDadosException {
 		if (tipo_de_insercao.equals("inserir")) {
-			if (email != null || !email.isEmpty() && !email.equals("cliente")) {
+			if (email != null && !email.isEmpty() && !email.equals("cliente")) {
 				boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
 				if (inserido == true) {
 					this.funcionario.inserirFuncionario(nome, cpf, senha, telefone, email);
@@ -76,7 +83,7 @@ public class Fachada {
 				}
 			}
 		} else if (tipo_de_insercao.equals("atualizar")) {
-			if (email != null || !email.isEmpty() && !email.equals("cliente")) {
+			if (email != null && !email.isEmpty() && !email.equals("cliente")) {
 				boolean inserido = this.pessoa.validarDadosPessoa(nome, cpf, senha, telefone, email);
 				if (inserido == true) {
 					this.funcionario.atualizarFuncionario(cpf, nome, senha, telefone, email);
@@ -94,10 +101,10 @@ public class Fachada {
 		}
 	}
 
-	public void removerPessoa(String cpf, String tipo_de_insercao) {
-		if (tipo_de_insercao.equals("funcionario")) {
+	public void removerPessoa(String cpf, String tipo_de_remocao) {
+		if (tipo_de_remocao.equals("funcionario")) {
 			this.funcionario.removerFuncionario(cpf);
-		} else if (tipo_de_insercao.equals("atualizar")) {
+		} else if (tipo_de_remocao.equals("atualizar")) {
 			this.funcionario.removerFuncionario(cpf);
 		}
 	}
@@ -123,7 +130,7 @@ public class Fachada {
 				for(Funcionario f : this.funcionario.getRepositorio().getFuncionarios()) {
 					if(f.getEmail().equals(email)) {
 						if(f.getSenha().equals(senha)) {
-							if(f.getTipo() == 0) {
+							if(f.getTipo() == 2) {
 								return 0;
 							}else if(f.getTipo() == 1) {
 								return 1;
@@ -145,5 +152,43 @@ public class Fachada {
 		}
 
 		return -1;
+	}
+	
+	public ArrayList<Funcionario> getAllFuncionarios() {
+		this.funcionario.getAllFuncionarios();
+		return this.funcionario.getRepositorio().getFuncionarios();
+	}
+	
+	public ArrayList<Funcionario> findFuncionarioByName(String nome) {
+		this.funcionario.findByName(nome);
+		return this.funcionario.getRepositorio().getFuncionarios();
+	}
+	
+	public ArrayList<Cliente> getAllClientes() {
+		this.cliente.getAllClientes();
+		return this.cliente.getRepositorio().getClientes();
+	}
+	
+	public ArrayList<Funcionario> findClientesByName(String nome) {
+		this.funcionario.findByName(nome);
+		return this.funcionario.getRepositorio().getFuncionarios();
+	}
+	
+	public void inserirLocacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
+		this.locacao.inserirLocacao(clienteCPF, veiculoPlaca, valorTotal, data_devolucao);
+	}
+	
+	public void atualizarLocacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
+		this.locacao.atualizarLocacao(clienteCPF, veiculoPlaca, valorTotal, data_devolucao);
+	}
+	
+	public ArrayList<Locacao> encontrarLocacao(String clienteCPF, String veiculoPlaca) {
+		this.locacao.encontrarLocacao(clienteCPF, veiculoPlaca);
+		return this.locacao.getRepositorio().getLocacoes();
+	}
+	
+	public ArrayList<Locacao> todasLocacoes() {
+		this.locacao.encontrarTodasLocacoes();
+		return this.locacao.getRepositorio().getLocacoes();
 	}
 }

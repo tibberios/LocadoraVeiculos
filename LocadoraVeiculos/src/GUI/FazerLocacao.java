@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Fachada.Fachada;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -75,6 +78,12 @@ public class FazerLocacao extends JFrame {
 		contentPane.add(lblDataDevoluo);
 		
 		JButton btnLocar = new JButton("Locar");
+		btnLocar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Fachada f = new Fachada();
+				
+			}
+		});
 		btnLocar.setBackground(new Color(50, 205, 50));
 		btnLocar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnLocar.setBounds(302, 212, 91, 23);

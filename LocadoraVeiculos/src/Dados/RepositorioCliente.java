@@ -6,14 +6,19 @@ import javax.swing.JOptionPane;
 
 import BancodeDados.Conexao;
 import Entidades.Cliente;
+import Entidades.Funcionario;
 import Util.UtilFunctions;
 
 public class RepositorioCliente implements UtilFunctions {
 	private ArrayList<Cliente> clientes;
-	private Cliente Cliente;
+	private Cliente cliente;
 	
 	public RepositorioCliente() {
 		this.clientes = new ArrayList<Cliente>();
+	}
+	
+	public ArrayList<Cliente> getClientes() {
+		return this.clientes;
 	}
 	
 	@Override
@@ -23,9 +28,9 @@ public class RepositorioCliente implements UtilFunctions {
 		Conexao.getInstance().buscarSQL(sql);
 		try {
 			while (Conexao.getInstance().getResultset().next()) {
-				Cliente = new Cliente(Conexao.getInstance().getResultset().getString("nome"), Conexao.getInstance().getResultset().getString("cpf"),
+				cliente = new Cliente(Conexao.getInstance().getResultset().getString("nome"), Conexao.getInstance().getResultset().getString("cpf"),
 						Conexao.getInstance().getResultset().getString("telefone"), Integer.parseInt(Conexao.getInstance().getResultset().getString("ativo")));
-				clientes.add(Cliente);
+				clientes.add(cliente);
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -40,9 +45,9 @@ public class RepositorioCliente implements UtilFunctions {
 				String sql = "SELECT * FROM cliente WHERE cpf = '" + cpf + "'";
 				Conexao.getInstance().buscarSQL(sql);
 				while (Conexao.getInstance().getResultset().next()) {
-					Cliente = new Cliente(Conexao.getInstance().getResultset().getString("nome"), Conexao.getInstance().getResultset().getString("cpf"),
+					cliente = new Cliente(Conexao.getInstance().getResultset().getString("nome"), Conexao.getInstance().getResultset().getString("cpf"),
 							Conexao.getInstance().getResultset().getString("telefone"), Integer.parseInt(Conexao.getInstance().getResultset().getString("ativo")));
-					clientes.add(Cliente);
+					clientes.add(cliente);
 				}
 			}
 		} catch (Exception e) {
@@ -51,29 +56,29 @@ public class RepositorioCliente implements UtilFunctions {
 		Conexao.getInstance().setResultset(null);	
 	}
 	
-	public boolean verificarSeExiste(Cliente Cliente) {
-		this.find(Cliente.getCpf());
+	public boolean verificarSeExiste(Cliente cliente) {
+		this.find(cliente.getCpf());
 		for (Cliente func: clientes) {
-			if (Cliente.getCpf().equals(func.getCpf())) {
+			if (cliente.getCpf().equals(func.getCpf())) {
 				return true;
 			} 
 		}
 		return false;
 	}
 
-	public void inserirCliente(Cliente Cliente) {
-		if (this.verificarSeExiste(Cliente) == true) {
+	public void inserirCliente(Cliente cliente) {
+		if (this.verificarSeExiste(cliente) == true) {
 			JOptionPane.showMessageDialog(null, "Cliente ja existe!", "Erro", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
 				String sql = "INSER INTO cliente (nome, cpf, senha, telefone, email) VALUES (";
-				if (!Cliente.getNome().isEmpty() && !Cliente.getCpf().isEmpty() && !Cliente.getTelefone().isEmpty()) {
-					sql += "'" + Cliente.getNome() + "', " + "'" + Cliente.getCpf() + "'" + Cliente.getTelefone() + "')";
+				if (!cliente.getNome().isEmpty() && !cliente.getCpf().isEmpty() && !cliente.getTelefone().isEmpty()) {
+					sql += "'" + cliente.getNome() + "', " + "'" + cliente.getCpf() + "', " + cliente.getTelefone() + "')";
 				}
 				
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
-					this.clientes.add(Cliente);
+					this.clientes.add(cliente);
 					JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso!");
 				}				
 			} catch (Exception e) {
@@ -123,5 +128,23 @@ public class RepositorioCliente implements UtilFunctions {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public void findByName(String nome) {
+		try {
+			if (nome != null && !nome.trim().equals("")) {
+				clientes.clear();
+				String sql = "SELECT * FROM cliente WHERE nome = '" + nome + "'";
+				Conexao.getInstance().buscarSQL(sql);
+				while (Conexao.getInstance().getResultset().next()) {
+					cliente = new Cliente(Conexao.getInstance().getResultset().getString("nome"), Conexao.getInstance().getResultset().getString("cpf"),
+							Conexao.getInstance().getResultset().getString("telefone"), Integer.parseInt(Conexao.getInstance().getResultset().getString("ativo")));
+					clientes.add(cliente);
+				}
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
 
+		Conexao.getInstance().setResultset(null);	
+	}
 }

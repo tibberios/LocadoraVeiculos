@@ -52,7 +52,6 @@ public class Conexao {
 		try {
 			Conexao.getInstance().getStatement().executeUpdate(sql);
 		}catch(Exception e) {
-			
 			return 500; //erro interno do sistema
 		}
 		return 200; //sucess

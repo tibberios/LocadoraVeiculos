@@ -164,7 +164,7 @@ public class CadastroUsuario extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnFunc.isSelected() == true) {
 					try {
-						fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), inputEmail.getText(), "inserir");
+						fachada.inserirPessoa((String)inputNome.getText(), (String)inputCpf.getText(), (String)inputSenha.getText(), (String)inputTelefone.getText(), (String)inputEmail.getText(), (String)"inserir");
 					} catch (FormatoDadosException e) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, e.toString(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -175,7 +175,7 @@ public class CadastroUsuario extends JFrame {
 					}
 					//gambiarra o email
 					try {
-						fachada.inserirPessoa(inputNome.getText(), inputCpf.getText(), inputSenha.getText(), inputTelefone.getText(), "cliente", "inserir");
+						fachada.inserirPessoa((String)inputNome.getText(), (String)inputCpf.getText(), (String)inputSenha.getText(), (String)inputTelefone.getText(), (String)"cliente", (String)"inserir");
 					} catch (FormatoDadosException e) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, e.toString(), "Erro", JOptionPane.ERROR_MESSAGE);

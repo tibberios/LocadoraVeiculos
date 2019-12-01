@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import Entidades.Funcionario;
+import Fachada.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -82,6 +86,10 @@ public class BuscarFuncionario extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
+				Fachada fachada = new Fachada();
+				for (Funcionario f: fachada.getAllFuncionarios()) {
+					comboBoxFuncionarios.addItem(f.getNome());
+				}
 				dispose();
 			}
 		});

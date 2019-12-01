@@ -24,4 +24,15 @@ public class ControleCliente  {
 		repositorio.remove(cpf);
 	}
 	
+	public void getAllClientes() {
+		repositorio.getAll();
+	}
+
+	public void findByName(String nome) {
+		repositorio.findByName(nome);
+	}
+	
+	public RepositorioCliente getRepositorio() {
+		return this.repositorio;
+	}
 }
