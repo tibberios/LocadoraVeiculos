@@ -104,7 +104,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 	public void remove(String placa) {
 		try {
 			if (placa != null && placa.trim().equals("")){
-				String sql = "UPDATE cliente SET ativo = 0 WHERE cpf = "+placa;
+				String sql = "UPDATE veiculo SET ativo = 0 WHERE placa = "+placa;
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					JOptionPane.showMessageDialog(null, "Veiculo desativado com sucesso!");
@@ -115,32 +115,63 @@ public class RepositorioVeiculo implements UtilFunctions{
 		}
 	}
 
-	public void update(String marca,String modelo,String cor,int km_rodados,int ano,double preco) {
+	public void update(String placa,String marca,String modelo,String cor,int km_rodados,int ano,double preco) {
 		try {
-			String sql = "UPDATE cliente SET";
+			String sql = "UPDATE veiculo SET";
 			int aux = 0;
-			
+
 			if(marca != null && marca.trim().equals("")) {
 				sql += " marca = '" + marca + "'";
 				aux = 1;
 			}
 			if(modelo!= null && modelo.trim().equals("")) {
-				sql+= " modelo = '" + modelo + "'";
+				if (aux == 1) {
+					sql += ", modelo = '" + modelo + "'";
+				} else {
+					aux = 1;
+					sql += " modelo = '" + modelo + "'";
+				}
 			}
+
 			if(cor != null && cor.trim().equals("")) {
-				sql+= " cor = '" + cor + "'";
+				if(aux==1) {
+					sql+= " cor = '" + cor + "'";
+				}else {
+					aux=1;
+					sql+= " cor = '" + cor + "'";	
+				}
 			}
-			
+
 			if(km_rodados > 0) {
-				sql+= " km_rodados = '" + km_rodados + "'";
+				if(aux==1) {
+					sql+= " km_rodados = '" + km_rodados + "'";
+				}else {
+					aux=1;
+					sql+= " km_rodados = '" + km_rodados + "'";	
+				}
 			}
-			
+
 			if(ano !=0 ) {
-				
+				if(aux==1) {
+					sql+= " ano = '" + ano + "'";
+				}else {
+					aux=1;
+					sql+= " km_rodados = '" + km_rodados + "'";	
+				}
 			}
-			
+
+			if(preco!=0) {
+				if(aux==1) {
+					sql+= " preco = '" + preco + "'";
+				}else {
+					aux=1;
+					sql+= " preco = '" + preco + "'";
+				}	
+			}
+			sql += " WHERE placa = '" + placa + "'";
+			Conexao.getInstance().executaSQL(sql);
 		}catch (Exception e) {
-			
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
