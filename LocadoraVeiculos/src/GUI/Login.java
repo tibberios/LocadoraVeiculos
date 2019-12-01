@@ -22,12 +22,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField inputEmail;
-	private JTextField inputSenha;
+	private JPasswordField inputSenha;
 	static int funcADM = -1;
 	public static Login instance;
 	public static Login getInstace() {
@@ -86,7 +87,7 @@ public class Login extends JFrame {
 		lblSenha.setBounds(10, 78, 46, 14);
 		panel.add(lblSenha);
 
-		inputSenha = new JTextField();
+		inputSenha = new JPasswordField();
 		inputSenha.setBounds(59, 77, 345, 20);
 		panel.add(inputSenha);
 		inputSenha.setColumns(10);

@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.JPasswordField;
 
 public class CadastroUsuario extends JFrame {
 
@@ -28,7 +29,7 @@ public class CadastroUsuario extends JFrame {
 	private JTextField inputNome;
 	private JTextField inputCpf;
 	private JTextField inputTelefone;
-	private JTextField inputSenha;
+	private JPasswordField inputSenha;
 	private JTextField inputEmail;
 	public static CadastroUsuario instance;
 	public static CadastroUsuario getInstace() {
@@ -107,7 +108,7 @@ public class CadastroUsuario extends JFrame {
 		panel.add(inputTelefone);
 		inputTelefone.setColumns(10);
 		
-		inputSenha = new JTextField();
+		inputSenha = new JPasswordField();
 		inputSenha.setBounds(79, 106, 245, 20);
 		panel.add(inputSenha);
 		inputSenha.setColumns(10);

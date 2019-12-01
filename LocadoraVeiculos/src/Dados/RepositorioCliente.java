@@ -71,11 +71,12 @@ public class RepositorioCliente implements UtilFunctions {
 			JOptionPane.showMessageDialog(null, "Cliente ja existe!", "Erro", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
-				String sql = "INSER INTO cliente (nome, cpf, senha, telefone, email) VALUES (";
+				String sql = "INSERT INTO cliente (nome, cpf, telefone) VALUES (";
 				if (!cliente.getNome().isEmpty() && !cliente.getCpf().isEmpty() && !cliente.getTelefone().isEmpty()) {
-					sql += "'" + cliente.getNome() + "', " + "'" + cliente.getCpf() + "', " + cliente.getTelefone() + "')";
+					sql += "'" + cliente.getNome() + "', " + "'" + cliente.getCpf() + "', '" + cliente.getTelefone() + "')";
 				}
 				
+				System.out.println(sql);
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					this.clientes.add(cliente);
