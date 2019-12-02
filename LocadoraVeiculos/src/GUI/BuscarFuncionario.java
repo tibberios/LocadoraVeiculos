@@ -22,7 +22,7 @@ import java.awt.SystemColor;
 public class BuscarFuncionario extends JFrame {
 
 	private JPanel contentPane;
-	JComboBox comboBoxFuncionarios = new JComboBox();
+	JComboBox<String> comboBoxFuncionarios = new JComboBox<String>();
 	public static BuscarFuncionario instance;
 	public static BuscarFuncionario getInstace() {
 		if (BuscarFuncionario.instance == null) {
@@ -30,8 +30,15 @@ public class BuscarFuncionario extends JFrame {
 		}
 		return BuscarFuncionario.instance;
 	}
-
-
+	
+	public void preencherCMB() {
+		
+		
+		for(Funcionario f : Fachada.getInstance().getAllFuncionarios()) {
+			comboBoxFuncionarios.addItem(f.getNome());
+		}
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -59,6 +66,8 @@ public class BuscarFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		preencherCMB();
+		
 		JLabel lblBuscarCliente = new JLabel("Buscar Funcionario");
 		lblBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblBuscarCliente.setBounds(145, 11, 185, 22);
@@ -68,11 +77,6 @@ public class BuscarFuncionario extends JFrame {
 		comboBoxFuncionarios.setBounds(53, 52, 351, 22);
 		contentPane.add(comboBoxFuncionarios);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBackground(SystemColor.textHighlight);
-		btnBuscar.setBounds(171, 85, 91, 23);
-		contentPane.add(btnBuscar);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(53, 119, 351, 120);
 		contentPane.add(scrollPane);
@@ -81,15 +85,24 @@ public class BuscarFuncionario extends JFrame {
 		scrollPane.setViewportView(textArea);
 		textArea.setEditable(false);
 		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Funcionario f = Fachada.getInstance().findFuncionarioByName((String) comboBoxFuncionarios.getSelectedItem()).get(0);
+				
+				textArea.setText("Nome: " + f.getNome() + "\nEmail: " + f.getEmail() + "\nCPF: " + f.getCpf() + "\nTelefone: " + f.getTelefone());
+			}
+		});
+		btnBuscar.setBackground(SystemColor.textHighlight);
+		btnBuscar.setBounds(171, 85, 91, 23);
+		contentPane.add(btnBuscar);
+		
+		
 		JButton button = new JButton("Voltar");
 		button.setBackground(SystemColor.textHighlight);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaDeGerenciamento.getInstace().setVisible(true);
-				Fachada fachada = new Fachada();
-				for (Funcionario f: fachada.getAllFuncionarios()) {
-					comboBoxFuncionarios.addItem(f.getNome());
-				}
 				dispose();
 			}
 		});

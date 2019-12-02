@@ -36,7 +36,7 @@ public class RepositorioFuncionario implements UtilFunctions{
 	@Override
 	public void getAll() {
 		funcionarios.clear();
-		String sql = "SELECT * FROM funcionario";
+		String sql = "SELECT * FROM funcionario WHERE  ativo = 1";
 		Conexao.getInstance().buscarSQL(sql);
 		try {
 			while (Conexao.getInstance().getResultset().next()) {
@@ -109,8 +109,8 @@ public class RepositorioFuncionario implements UtilFunctions{
 	public void remove(String cpf) {
 		try {
 			if (cpf != null && !cpf.trim().equals("")) {
-				String sql = "UPDATE funcionario SET ativo = 0 WHERE cpf = " + cpf;
-
+				String sql = "UPDATE funcionario SET ativo = '0' WHERE cpf = '" + cpf + "'";
+				System.out.println(sql);
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso!");

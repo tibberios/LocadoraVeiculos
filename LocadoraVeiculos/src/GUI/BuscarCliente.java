@@ -32,7 +32,16 @@ public class BuscarCliente extends JFrame {
 		}
 		return BuscarCliente.instance;
 	}
-
+	
+	public void preencherCMB() {
+		comboBoxClientes.removeAllItems();
+		
+		for (Cliente c : Fachada.getInstance().getAllClientes()) {
+			comboBoxClientes.addItem(c.getNome());
+		}
+		
+		
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +69,8 @@ public class BuscarCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		preencherCMB();
+		
 		JLabel lblBuscarCliente = new JLabel("Buscar Cliente");
 		lblBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblBuscarCliente.setBounds(145, 11, 185, 22);
@@ -69,19 +80,6 @@ public class BuscarCliente extends JFrame {
 		comboBoxClientes.setBounds(53, 52, 351, 22);
 		contentPane.add(comboBoxClientes);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBackground(SystemColor.textHighlight);
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Fachada fachada = new Fachada();
-				for (Cliente c: fachada.getAllClientes()) {
-					comboBoxClientes.addItem(c.getNome());
-				}
-			}
-		});
-		btnBuscar.setBounds(174, 85, 91, 23);
-		contentPane.add(btnBuscar);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(53, 119, 351, 120);
 		contentPane.add(scrollPane);
@@ -89,6 +87,21 @@ public class BuscarCliente extends JFrame {
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		textArea.setEditable(false);
+		
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(SystemColor.textHighlight);
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Cliente c = Fachada.getInstance().findClientesByName((String) comboBoxClientes.getSelectedItem()).get(0);
+			
+			textArea.setText("Nome" + c.getNome() + "\nCPF: " + c.getCpf() + "\nTelefone: " + c.getTelefone() );
+			
+			}
+		});
+		btnBuscar.setBounds(174, 85, 91, 23);
+		contentPane.add(btnBuscar);
+		
 		
 		JButton button = new JButton("Voltar");
 		button.setBackground(SystemColor.textHighlight);

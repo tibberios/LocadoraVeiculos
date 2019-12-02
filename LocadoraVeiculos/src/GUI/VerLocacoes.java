@@ -1,26 +1,25 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import Entidades.Cliente;
+import Entidades.Locacao;
 import Fachada.Fachada;
-
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.UIManager;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VerLocacoes extends JFrame {
 
@@ -37,6 +36,12 @@ public class VerLocacoes extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public void preencheCMB() {
+		comboBox.removeAllItems();
+		for (Cliente c : Fachada.getInstance().getAllClientes()) {
+			comboBox.addItem(c.getNome());
+		}
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -61,6 +66,8 @@ public class VerLocacoes extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		preencheCMB();
+		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(53, 25, 347, 22);
 		contentPane.add(comboBox);
@@ -76,6 +83,15 @@ public class VerLocacoes extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			textArea.setText("");
+			String cpf = Fachada.getInstance().findClientesByName((String) comboBox.getSelectedItem()).get(0).getCpf();
+			Fachada.getInstance().todasLocacoesCliente(cpf);
+			
+			for(Locacao l : Fachada.getInstance().getLocacao().getRepositorio().getLocacoes()) {
+				textArea.setText("Placa:" + l.getVeiculoPlaca() + "\nValor:" + l.getValorTotal() + "\nDataDevolucao: " + l.getData_devolucao()
+				+ "\nDataLocacao:" + l.getData_locacao() + "\n\n");
+			}
+			
 			}
 		});
 		btnBuscar.setBackground(SystemColor.textHighlight);

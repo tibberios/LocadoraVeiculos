@@ -19,6 +19,23 @@ public class RepositorioVeiculo implements UtilFunctions{
 		veiculos = new ArrayList <Veiculo>();
 	}
 
+	
+	
+	
+	public ArrayList<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+
+
+
+	public void setVeiculos(ArrayList<Veiculo> veiculos) {
+		this.veiculos = veiculos;
+	}
+
+
+
+
 	public boolean verifarSeexiste(Veiculo veiculo) {
 		this.find(veiculo.getPlaca());
 		for(Veiculo car : veiculos) {
@@ -41,26 +58,24 @@ public class RepositorioVeiculo implements UtilFunctions{
 			sql += "'"+veiculo.getKilometragem()+"', ";
 			sql += "'"+veiculo.getAno()+"', ";
 			sql += "'"+veiculo.getPreco()+"')";
-			Conexao.getInstance().executaSQL(sql);
+			int aux = Conexao.getInstance().executaSQL(sql);
+			
+			if(aux == 200) {
+				JOptionPane.showMessageDialog(null, "Veiculo Inserido");
+			}
 		}else {
 			throw new PlacaExisteExeception (veiculo.getPlaca());
 		}
+		
+		
 	}
 
-	public void removerVeiculo(Veiculo veiculo) {
-		for(Veiculo car : veiculos) {
-			if(veiculo.getPlaca().equals(car.getPlaca())== true){
 
-
-
-			}
-		}
-	}
 
 	@Override
 	public void getAll() {
 		veiculos.clear();
-		String sql = "SELECT * FROM funcionario";
+		String sql = "SELECT * FROM veiculo WHERE ativo = 1";
 		Conexao.getInstance().buscarSQL(sql);
 
 		try {
@@ -103,8 +118,9 @@ public class RepositorioVeiculo implements UtilFunctions{
 	@Override
 	public void remove(String placa) {
 		try {
-			if (placa != null && placa.trim().equals("")){
-				String sql = "UPDATE veiculo SET ativo = 0 WHERE placa = "+placa;
+			if (placa != null && !placa.trim().equals("")){
+				String sql = "UPDATE veiculo SET ativo = '0' WHERE placa = '"+ placa + "'";
+				System.out.println(sql);
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					JOptionPane.showMessageDialog(null, "Veiculo desativado com sucesso!");
@@ -120,11 +136,11 @@ public class RepositorioVeiculo implements UtilFunctions{
 			String sql = "UPDATE veiculo SET";
 			int aux = 0;
 
-			if(marca != null && marca.trim().equals("")) {
+			if(marca != null && !marca.trim().equals("")) {
 				sql += " marca = '" + marca + "'";
 				aux = 1;
 			}
-			if(modelo!= null && modelo.trim().equals("")) {
+			if(modelo!= null && !modelo.trim().equals("")) {
 				if (aux == 1) {
 					sql += ", modelo = '" + modelo + "'";
 				} else {
@@ -133,9 +149,9 @@ public class RepositorioVeiculo implements UtilFunctions{
 				}
 			}
 
-			if(cor != null && cor.trim().equals("")) {
+			if(cor != null && !cor.trim().equals("")) {
 				if(aux==1) {
-					sql+= " cor = '" + cor + "'";
+					sql+= ", cor = '" + cor + "'";
 				}else {
 					aux=1;
 					sql+= " cor = '" + cor + "'";	
@@ -144,7 +160,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 
 			if(km_rodados > 0) {
 				if(aux==1) {
-					sql+= " km_rodados = '" + km_rodados + "'";
+					sql+= ", km_rodados = '" + km_rodados + "'";
 				}else {
 					aux=1;
 					sql+= " km_rodados = '" + km_rodados + "'";	
@@ -153,22 +169,23 @@ public class RepositorioVeiculo implements UtilFunctions{
 
 			if(ano !=0 ) {
 				if(aux==1) {
-					sql+= " ano = '" + ano + "'";
+					sql+= ", ano = '" + ano + "'";
 				}else {
 					aux=1;
-					sql+= " km_rodados = '" + km_rodados + "'";	
+					sql+= " ano = '" + ano + "'";	
 				}
 			}
 
 			if(preco!=0) {
 				if(aux==1) {
-					sql+= " preco = '" + preco + "'";
+					sql+= ", preco = '" + preco + "'";
 				}else {
 					aux=1;
 					sql+= " preco = '" + preco + "'";
 				}	
 			}
 			sql += " WHERE placa = '" + placa + "'";
+			System.out.println(sql);
 			Conexao.getInstance().executaSQL(sql);
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);

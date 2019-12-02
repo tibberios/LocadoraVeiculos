@@ -5,7 +5,7 @@ import Entidades.Locacao;
 
 public class ControleLocacao {
 	private RepositorioLocacao repositorio;
-	private Locacao locacao;
+	Locacao locacao;
 	
 	public RepositorioLocacao getRepositorio() {
 		return repositorio;
@@ -19,12 +19,16 @@ public class ControleLocacao {
 		return locacao;
 	}
 	
+	
+	
 	public void setLocacao(Locacao locacao) {
 		this.locacao = locacao;
 	}
 	
 	public void inserirLocacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
+		System.out.println(2);
 		this.locacao = new Locacao(clienteCPF, veiculoPlaca, valorTotal, data_devolucao);
+		System.out.println(locacao.getData_devolucao());
 		this.repositorio.inserirLocacao(locacao);
 	}
 	
@@ -36,8 +40,8 @@ public class ControleLocacao {
 		this.repositorio.atualizarLocacao(clienteCPF, veiculoPlaca, valorTotal, data_devolucao);
 	}
 	
-	public void encontrarTodasLocacoes() {
-		this.repositorio.encontrarTodasLocacoes();
+	public void encontrarTodasLocacoesCliente(String clienteCPF) {
+		this.repositorio.encontrarTodasLocacoesCliente(clienteCPF);
 	}
 	
 }

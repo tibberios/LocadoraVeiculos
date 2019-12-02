@@ -7,6 +7,7 @@ public class Locacao {
 	private String data_locacao;
 	private String veiculoPlaca;
 	
+	
 	public Locacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
 		this.setClienteCPF(clienteCPF);
 		this.setValorTotal(valorTotal);
@@ -20,6 +21,7 @@ public class Locacao {
 		this.setData_devolucao(data_devolucao);
 		this.setVeiculoPlaca(veiculoPlaca);
 		this.setData_locacao(data_locacao);
+		
 	}
 
 	public double getValorTotal() {
@@ -61,5 +63,6 @@ public class Locacao {
 	public void setData_locacao(String data_locacao) {
 		this.data_locacao = data_locacao;
 	}
+
 
 }

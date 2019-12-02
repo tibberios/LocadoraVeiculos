@@ -46,6 +46,7 @@ public class RepositorioLocacao{
 	
 	public boolean verificarSeExiste(Locacao locacao) {
 		this.encontrarLocacao(locacao.getClienteCPF(), locacao.getVeiculoPlaca());
+		if(locacoes.size() != 0)
 		for (Locacao loc: locacoes) {
 			if (locacao.getClienteCPF().equals(loc.getClienteCPF()) && locacao.getVeiculoPlaca().equals(loc.getVeiculoPlaca())) {
 				return true;
@@ -55,15 +56,14 @@ public class RepositorioLocacao{
 	}
 	
 	public void inserirLocacao(Locacao locacao) {
-		if (this.verificarSeExiste(locacao) == true) {
-			JOptionPane.showMessageDialog(null, "Locacao ja existe!", "Erro", JOptionPane.ERROR_MESSAGE);
-		} else {
-			try {
+		System.out.println(locacao.getClienteCPF());	
+		try {
+				
 				String sql = "INSERT INTO locacao (clienteCPF, veiculoPlaca, valorTotal, data_devolucao) VALUES (";
 				if (!locacao.getClienteCPF().isEmpty() && !locacao.getVeiculoPlaca().isEmpty() && locacao.getValorTotal() > 0 && !locacao.getData_devolucao().isEmpty()) {
 					sql += "'" + locacao.getClienteCPF() + "', " + "'" + locacao.getVeiculoPlaca() + "', "  + locacao.getValorTotal() + ", " + "'" + locacao.getData_devolucao() + "')"; 
 				}
-
+				System.out.println(sql);
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					this.locacoes.add(locacao);
@@ -73,11 +73,11 @@ public class RepositorioLocacao{
 				JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}
 	
-	public void encontrarTodasLocacoes() {
+	
+	public void encontrarTodasLocacoesCliente(String clienteCPF) {
 		locacoes.clear();
-		String sql = "SELECT * FROM locacao";
+		String sql = "SELECT * FROM locacao  WHERE clienteCPF = '" + clienteCPF + "'";
 		Conexao.getInstance().buscarSQL(sql);
 		try {
 			while (Conexao.getInstance().getResultset().next()) {

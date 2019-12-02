@@ -95,19 +95,34 @@ public class ControlePessoa {
 		
 		if (nome != null && !nome.trim().equals("")) {
 			retornar = this.validarNome(nome);
+			if (retornar == false) {
+				return false;
+			}
 		}
 		if (cpf != null && !cpf.trim().equals("")) {
 			retornar = this.validarCPF(cpf);
+			if (retornar == false) {
+				return false;
+			}
 		}
 		if (senha != null && !senha.trim().equals("")) {
 			retornar = this.validarSenha(senha);
+			if (retornar == false) {
+				return false;
+			}
 		}
 		if (telefone != null && !telefone.trim().equals("")) {
 			retornar = this.validarTelefone(telefone);
+			if (retornar == false) {
+				return false;
+			}
 		}
 		//gambiarra
 		if (email != null && !email.trim().equals("") && !email.equals("cliente")) {
 			retornar = this.validarEmail(email);
+			if (retornar == false) {
+				return false;
+			}
 		}
 
 		return retornar;

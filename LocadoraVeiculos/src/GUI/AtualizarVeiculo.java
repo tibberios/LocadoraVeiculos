@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import Entidades.Veiculo;
+import Fachada.Fachada;
+
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,6 +29,7 @@ public class AtualizarVeiculo extends JFrame {
 	private JTextField textPreco;
 	JComboBox comboBoxVeiculos = new JComboBox();
 	public static AtualizarVeiculo instance;
+	private JTextField textKm;
 	public static AtualizarVeiculo getInstace() {
 		if (AtualizarVeiculo.instance == null) {
 			return AtualizarVeiculo.instance = new AtualizarVeiculo();
@@ -34,6 +39,14 @@ public class AtualizarVeiculo extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public void preencherCMB() {
+		Fachada.getInstance().getVeiculo().getRv().getAll();
+		comboBoxVeiculos.removeAllItems();
+		for(Veiculo v : Fachada.getInstance().getVeiculo().getRv().getVeiculos()){
+
+			comboBoxVeiculos.addItem(v.getPlaca());
+		}
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -52,15 +65,15 @@ public class AtualizarVeiculo extends JFrame {
 	 */
 	public AtualizarVeiculo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 332);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		preencherCMB();
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBounds(50, 89, 347, 173);
+		panel.setBounds(50, 89, 347, 193);
 		getContentPane().add(panel);
 		
 		JLabel lblMarca = new JLabel("Marca");
@@ -102,7 +115,7 @@ public class AtualizarVeiculo extends JFrame {
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_1.setBounds(10, 144, 89, 23);
+		button_1.setBounds(10, 179, 89, 14);
 		panel.add(button_1);
 		
 		JLabel lblAno = new JLabel("Ano");
@@ -115,9 +128,29 @@ public class AtualizarVeiculo extends JFrame {
 		textAno.setBounds(79, 91, 245, 20);
 		panel.add(textAno);
 		
+		textPreco = new JTextField();
+		textPreco.setColumns(10);
+		textPreco.setBounds(79, 116, 245, 20);
+		panel.add(textPreco);
+		
+		JLabel lblQuilometros = new JLabel("Quilometros");
+		lblQuilometros.setBounds(10, 154, 46, 14);
+		panel.add(lblQuilometros);
+		
+		textKm = new JTextField();
+		textKm.setBounds(79, 147, 245, 20);
+		panel.add(textKm);
+		textKm.setColumns(10);
+		
 		JButton btnAtualizarVeiculo = new JButton("Atualizar Veiculo");
+		btnAtualizarVeiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Fachada.getInstance().atualizarVeiculo((String)comboBoxVeiculos.getSelectedItem(),(String) textMarca.getText(),(String) textModelo.getText(),(String) textCor.getText(), Integer.parseInt(textAno.getText()), Double.parseDouble(textPreco.getText()), Integer.parseInt(textKm.getText()));
+			preencherCMB();
+			}
+		});
 		btnAtualizarVeiculo.setBackground(new Color(50, 205, 50));
-		btnAtualizarVeiculo.setBounds(201, 146, 124, 23);
+		btnAtualizarVeiculo.setBounds(213, 180, 124, 16);
 		panel.add(btnAtualizarVeiculo);
 		
 		JLabel lblPreco = new JLabel("Pre\u00E7o");
@@ -125,10 +158,7 @@ public class AtualizarVeiculo extends JFrame {
 		lblPreco.setBounds(10, 117, 46, 14);
 		panel.add(lblPreco);
 		
-		textPreco = new JTextField();
-		textPreco.setColumns(10);
-		textPreco.setBounds(79, 116, 245, 20);
-		panel.add(textPreco);
+	
 		
 		JLabel lblAtualizarVeiculo = new JLabel("Atualizar Veiculo");
 		lblAtualizarVeiculo.setBounds(137, 11, 185, 22);
@@ -140,6 +170,21 @@ public class AtualizarVeiculo extends JFrame {
 		contentPane.add(comboBoxVeiculos);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Fachada.getInstance().getVeiculo().getRv().find((String) comboBoxVeiculos.getSelectedItem());
+				Veiculo v = Fachada.getInstance().getVeiculo().getRv().getVeiculos().get(0);
+				
+				textMarca.setText(v.getMarca());
+				textModelo.setText(v.getModelo());
+				textCor.setText(v.getCor());
+				textAno.setText(""+v.getAno());
+				textPreco.setText(""+ v.getPreco());
+				textKm.setText(""+v.getKilometragem());
+				
+								
+			}
+		});
 		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.setBounds(183, 66, 91, 22);
 		contentPane.add(btnBuscar);

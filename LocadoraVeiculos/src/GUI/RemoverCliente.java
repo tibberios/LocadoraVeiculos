@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import Entidades.Cliente;
 import Fachada.Fachada;
 
 import java.awt.event.ActionListener;
@@ -30,6 +31,16 @@ public class RemoverCliente extends JFrame {
 		return RemoverCliente.instance;
 	}
 
+	public void preencherCMB() {
+		comboBoxClientes.removeAllItems();
+		
+		for (Cliente c : Fachada.getInstance().getAllClientes()) {
+			comboBoxClientes.addItem(c.getNome());
+		}
+		
+		
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -57,6 +68,8 @@ public class RemoverCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		preencherCMB();
+		
 		JLabel lblBuscarCliente = new JLabel("Remover Cliente");
 		lblBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblBuscarCliente.setBounds(145, 11, 185, 22);
@@ -66,11 +79,6 @@ public class RemoverCliente extends JFrame {
 		comboBoxClientes.setBounds(54, 52, 351, 22);
 		contentPane.add(comboBoxClientes);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBackground(UIManager.getColor("TextPane.selectionBackground"));
-		btnBuscar.setBounds(172, 85, 91, 23);
-		contentPane.add(btnBuscar);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(54, 119, 351, 120);
 		contentPane.add(scrollPane);
@@ -79,11 +87,28 @@ public class RemoverCliente extends JFrame {
 		scrollPane.setViewportView(textArea);
 		textArea.setEditable(false);
 		
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cliente c = Fachada.getInstance().findClientesByName((String) comboBoxClientes.getSelectedItem()).get(0);
+				
+				textArea.setText("Nome" + c.getNome() + "\nCPF: " + c.getCpf() + "\nTelefone: " + c.getTelefone() );
+				
+			}
+		});
+		btnBuscar.setBackground(UIManager.getColor("TextPane.selectionBackground"));
+		btnBuscar.setBounds(172, 85, 91, 23);
+		contentPane.add(btnBuscar);
+
 		JButton btnRemover = new JButton("Remover");
 		btnRemover.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				String cpf = Fachada.getInstance().findClientesByName((String) comboBoxClientes.getSelectedItem()).get(0).getCpf();
+				
+				Fachada.getInstance().removerPessoa(cpf, "cliente");
+				preencherCMB();
 			}
 		});
 		btnRemover.setBounds(54, 239, 91, 23);

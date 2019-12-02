@@ -7,10 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Entidades.Cliente;
+import Excecoes.FormatoDadosException;
 import Fachada.Fachada;
 
 import java.awt.event.ActionListener;
@@ -35,6 +38,17 @@ public class AtualizarCliente extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+	public void preencherCMB() {
+		comboBox.removeAllItems();
+		
+		for (Cliente c : Fachada.getInstance().getAllClientes()) {
+			comboBox.addItem(c.getNome());
+		}
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,6 +72,8 @@ public class AtualizarCliente extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		preencherCMB();
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(28, 99, 377, 149);
@@ -99,7 +115,13 @@ public class AtualizarCliente extends JFrame {
 		btnSalvar.setBackground(new Color(50, 205, 50));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Fachada.getInstance().getCliente().atualizarCliente((String)inputCpf.getText(), (String)inputNome.getText(), (String)inputTelefone.getText());
+			try {
+				Fachada.getInstance().inserirPessoa((String)inputNome.getText(),(String) inputCpf.getText(),"", inputTelefone.getText(), "cliente", "atualizar");
+			} catch (FormatoDadosException e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e.toString());
+			}
+			preencherCMB();
 			}
 		});
 
@@ -124,6 +146,16 @@ public class AtualizarCliente extends JFrame {
 		contentPane.add(comboBox);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cliente c = Fachada.getInstance().findClientesByName((String) comboBox.getSelectedItem()).get(0);
+				
+				inputNome.setText(c.getNome());
+				inputCpf.setText(c.getCpf());
+				inputTelefone.setText(c.getTelefone());
+				
+			}
+		});
 		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.setBounds(174, 65, 91, 23);
 		contentPane.add(btnBuscar);

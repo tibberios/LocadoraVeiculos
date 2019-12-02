@@ -10,23 +10,27 @@ import Entidades.Funcionario;
 import Entidades.Locacao;
 import Excecoes.EmailNaoCadastradoException;
 import Excecoes.FormatoDadosException;
+import Excecoes.PlacaExisteExeception;
 import Excecoes.SenhaInvalidaException;
 import Negocio.ControleCliente;
 import Negocio.ControleFuncionario;
 import Negocio.ControleLocacao;
 import Negocio.ControlePessoa;
+import Negocio.ControleVeiculo;
 
 public class Fachada {
 	private ControlePessoa pessoa;     
 	private ControleFuncionario funcionario;
 	private ControleCliente cliente;
 	private ControleLocacao locacao;
+	private ControleVeiculo veiculo;
 	
 	public Fachada() {
 		pessoa = new ControlePessoa();
 		funcionario = new ControleFuncionario();
 		cliente = new ControleCliente();
 		locacao = new ControleLocacao();
+		veiculo = new ControleVeiculo();
 	}
 	
 	public static Fachada instance;
@@ -36,6 +40,37 @@ public class Fachada {
 		}
 		return Fachada.instance;
 	}
+
+	
+	
+	
+	public ControleLocacao getLocacao() {
+		return locacao;
+	}
+
+
+
+
+	public void setLocacao(ControleLocacao locacao) {
+		this.locacao = locacao;
+	}
+
+
+
+
+	public ControleVeiculo getVeiculo() {
+		return veiculo;
+	}
+
+
+
+
+	public void setVeiculo(ControleVeiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+
+
 
 	public ControlePessoa getPessoa() {
 		return pessoa;
@@ -104,8 +139,8 @@ public class Fachada {
 	public void removerPessoa(String cpf, String tipo_de_remocao) {
 		if (tipo_de_remocao.equals("funcionario")) {
 			this.funcionario.removerFuncionario(cpf);
-		} else if (tipo_de_remocao.equals("atualizar")) {
-			this.funcionario.removerFuncionario(cpf);
+		} else if (tipo_de_remocao.equals("cliente")) {
+			this.cliente.removerCliente(cpf);
 		}
 	}
 
@@ -169,12 +204,13 @@ public class Fachada {
 		return this.cliente.getRepositorio().getClientes();
 	}
 	
-	public ArrayList<Funcionario> findClientesByName(String nome) {
-		this.funcionario.findByName(nome);
-		return this.funcionario.getRepositorio().getFuncionarios();
+	public ArrayList<Cliente> findClientesByName(String nome) {
+		this.cliente.findByName(nome);
+		return this.cliente.getRepositorio().getClientes();
 	}
 	
 	public void inserirLocacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
+		System.out.println(1);
 		this.locacao.inserirLocacao(clienteCPF, veiculoPlaca, valorTotal, data_devolucao);
 	}
 	
@@ -187,8 +223,22 @@ public class Fachada {
 		return this.locacao.getRepositorio().getLocacoes();
 	}
 	
-	public ArrayList<Locacao> todasLocacoes() {
-		this.locacao.encontrarTodasLocacoes();
+	public ArrayList<Locacao> todasLocacoesCliente(String clienteCPF) {
+		this.locacao.encontrarTodasLocacoesCliente(clienteCPF);
 		return this.locacao.getRepositorio().getLocacoes();
+	}
+	
+	public void inserirVeiculo(String placa , String marca , String modelo , String cor , int ano , double preco, int km_rodados) throws PlacaExisteExeception {
+		this.veiculo.inserir(placa, marca, modelo, cor, ano, preco, km_rodados);
+	}
+	
+	public void atualizarVeiculo(String placa , String marca , String modelo , String cor , int ano , double preco, int km_rodados) {
+		System.out.println(1);
+		this.veiculo.atualizar(placa, marca, modelo, cor, ano, preco, km_rodados);
+	}
+	
+	public void removerVeiculo(String placa) {
+		System.out.println(1);
+		this.veiculo.remove(placa);
 	}
 }

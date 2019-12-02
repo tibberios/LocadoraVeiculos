@@ -16,7 +16,7 @@ public class ControleCliente  {
 		repositorio.inserirCliente(Cliente);
 	}
 	
-	public void atualizarCliente(String cpf, String nome, String telefone)  {
+	public void atualizarCliente(String nome, String cpf, String telefone)  {
 		repositorio.update(cpf, nome, telefone);
 	}
 	

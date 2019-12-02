@@ -7,9 +7,14 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import Excecoes.PlacaExisteExeception;
+import Fachada.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -25,6 +30,7 @@ public class Cadastro_Veiculo extends JFrame {
 	private JTextField textAno;
 	private JTextField textPreco;
 	public static Cadastro_Veiculo instance;
+	private JTextField textKm;
 	public static Cadastro_Veiculo getInstace() {
 		if (Cadastro_Veiculo.instance == null) {
 			return Cadastro_Veiculo.instance = new Cadastro_Veiculo();
@@ -65,42 +71,42 @@ public class Cadastro_Veiculo extends JFrame {
 		
 		JLabel lblPlaca = new JLabel("Placa");
 		lblPlaca.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPlaca.setBounds(10, 37, 46, 14);
+		lblPlaca.setBounds(10, 17, 46, 14);
 		panel.add(lblPlaca);
 		
 		JLabel lblMarca = new JLabel("Marca");
 		lblMarca.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblMarca.setBounds(10, 62, 46, 14);
+		lblMarca.setBounds(10, 42, 46, 14);
 		panel.add(lblMarca);
 		
 		JLabel lblModelo = new JLabel("Modelo");
 		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblModelo.setBounds(10, 87, 51, 14);
+		lblModelo.setBounds(10, 67, 51, 14);
 		panel.add(lblModelo);
 		
 		JLabel lblCor = new JLabel("Cor");
 		lblCor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCor.setBounds(10, 112, 46, 14);
+		lblCor.setBounds(10, 92, 46, 14);
 		panel.add(lblCor);
 		
 		textPlaca = new JTextField();
 		textPlaca.setColumns(10);
-		textPlaca.setBounds(79, 31, 245, 20);
+		textPlaca.setBounds(79, 11, 245, 20);
 		panel.add(textPlaca);
 		
 		textMarca = new JTextField();
 		textMarca.setColumns(10);
-		textMarca.setBounds(79, 56, 245, 20);
+		textMarca.setBounds(79, 36, 245, 20);
 		panel.add(textMarca);
 		
 		textModelo = new JTextField();
 		textModelo.setColumns(10);
-		textModelo.setBounds(79, 81, 245, 20);
+		textModelo.setBounds(79, 61, 245, 20);
 		panel.add(textModelo);
 		
 		textCor = new JTextField();
 		textCor.setColumns(10);
-		textCor.setBounds(79, 106, 245, 20);
+		textCor.setBounds(79, 86, 245, 20);
 		panel.add(textCor);
 		
 		JButton button_1 = new JButton("< Voltar");
@@ -117,33 +123,55 @@ public class Cadastro_Veiculo extends JFrame {
 		
 		JLabel lblAno = new JLabel("Ano");
 		lblAno.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAno.setBounds(10, 137, 46, 14);
+		lblAno.setBounds(10, 117, 46, 14);
 		panel.add(lblAno);
 		
 		textAno = new JTextField();
 		textAno.setColumns(10);
-		textAno.setBounds(79, 136, 245, 20);
+		textAno.setBounds(79, 116, 245, 20);
 		panel.add(textAno);
 		
+		textPreco = new JTextField();
+		textPreco.setColumns(10);
+		textPreco.setBounds(79, 141, 245, 20);
+		panel.add(textPreco);
+		
 		JButton btnIncluirVeiculo = new JButton("Incluir Veiculo");
+		btnIncluirVeiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Fachada.getInstance().inserirVeiculo((String)textPlaca.getText(), (String)textMarca.getText(), (String)textModelo.getText(), (String)textCor.getText(), Integer.parseInt(textAno.getText()), Double.parseDouble(textPreco.getText()), Integer.parseInt(textKm.getText()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e.toString());
+				} catch (PlacaExisteExeception e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e.toString());
+				}
+			}
+		});
 		btnIncluirVeiculo.setBackground(new Color(50, 205, 50));
 		btnIncluirVeiculo.setBounds(243, 191, 124, 23);
 		panel.add(btnIncluirVeiculo);
 		
 		JLabel lblPreco = new JLabel("Pre\u00E7o");
 		lblPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPreco.setBounds(10, 162, 46, 14);
+		lblPreco.setBounds(10, 142, 46, 14);
 		panel.add(lblPreco);
 		
-		textPreco = new JTextField();
-		textPreco.setColumns(10);
-		textPreco.setBounds(79, 161, 245, 20);
-		panel.add(textPreco);
+		JLabel lblQuilometros = new JLabel("Quilometros");
+		lblQuilometros.setBounds(10, 164, 64, 14);
+		panel.add(lblQuilometros);
+		
+		textKm = new JTextField();
+		textKm.setBounds(79, 167, 245, 20);
+		panel.add(textKm);
+		textKm.setColumns(10);
+		
 		
 		JLabel lblCadastroDeVeiculo = new JLabel("Cadastro de Veiculo");
 		lblCadastroDeVeiculo.setBounds(137, 11, 185, 22);
 		contentPane.add(lblCadastroDeVeiculo);
 		lblCadastroDeVeiculo.setFont(new Font("Tahoma", Font.BOLD, 18));
 	}
-
 }

@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import Entidades.Funcionario;
+import Fachada.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
@@ -29,6 +33,14 @@ public class RemoverFuncionario extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public void preencherCMB() {
+
+		comboBoxFuncionarios.removeAllItems();
+		for(Funcionario f : Fachada.getInstance().getAllFuncionarios()) {
+			comboBoxFuncionarios.addItem(f.getNome());
+		}
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -52,6 +64,8 @@ public class RemoverFuncionario extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		preencherCMB();
 		
 		JLabel lblBuscarCliente = new JLabel("Remover Funcionario");
 		lblBuscarCliente.setBounds(145, 11, 185, 22);
@@ -59,29 +73,44 @@ public class RemoverFuncionario extends JFrame {
 		contentPane.add(lblBuscarCliente);
 		comboBoxFuncionarios.setBounds(54, 52, 351, 22);
 		contentPane.add(comboBoxFuncionarios);
-		
+
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(54, 119, 351, 120);
+		contentPane.add(scrollPane);
+
+		JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+		textArea.setEditable(false);
+
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Funcionario f = Fachada.getInstance().findFuncionarioByName((String) comboBoxFuncionarios.getSelectedItem()).get(0);
+
+				textArea.setText("Nome: " + f.getNome() + "\nEmail: " + f.getEmail() + "\nCPF: " + f.getCpf() + "\nTelefone: " + f.getTelefone());
+
+
 			}
 		});
 		btnBuscar.setBackground(UIManager.getColor("TextPane.selectionBackground"));
 		btnBuscar.setBounds(172, 85, 91, 23);
 		contentPane.add(btnBuscar);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(54, 119, 351, 120);
-		contentPane.add(scrollPane);
-		
-		JTextArea textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
-		textArea.setEditable(false);
-		
+
+
 		JButton btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			String cpf = Fachada.getInstance().findFuncionarioByName((String) comboBoxFuncionarios.getSelectedItem()).get(0).getCpf();
+			Fachada.getInstance().removerPessoa(cpf, "funcionario");
+			preencherCMB();
+				
+			}
+		});
 		btnRemover.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
 		btnRemover.setBounds(52, 239, 91, 23);
 		contentPane.add(btnRemover);
-		
+
 		JButton button = new JButton("Voltar");
 		button.setBackground(UIManager.getColor("TextPane.selectionBackground"));
 		button.setBounds(314, 239, 91, 23);
@@ -92,7 +121,7 @@ public class RemoverFuncionario extends JFrame {
 			}
 		});
 		contentPane.add(button);
-	
+
 	}
 
 }
