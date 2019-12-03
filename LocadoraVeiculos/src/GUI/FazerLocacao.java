@@ -84,13 +84,13 @@ public class FazerLocacao extends JFrame {
 		contentPane.add(comboBox_1);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(122, 165, 271, 20);
+		textField_1.setBounds(122, 181, 271, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblDataDevoluo = new JLabel("Data Devolu\u00E7\u00E3o ");
 		lblDataDevoluo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDataDevoluo.setBounds(10, 166, 102, 14);
+		lblDataDevoluo.setBounds(10, 182, 102, 14);
 		contentPane.add(lblDataDevoluo);
 		
 		JButton btnLocar = new JButton("Locar");
@@ -134,11 +134,12 @@ public class FazerLocacao extends JFrame {
 		contentPane.add(btnVoltar);
 		
 		JLabel lblNewLabel = new JLabel("VALOR");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(10, 147, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		textPreco = new JTextField();
-		textPreco.setBounds(122, 136, 271, 20);
+		textPreco.setBounds(122, 146, 271, 20);
 		contentPane.add(textPreco);
 		textPreco.setColumns(10);
 	}

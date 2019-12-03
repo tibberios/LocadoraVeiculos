@@ -120,7 +120,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 		try {
 			if (placa != null && !placa.trim().equals("")){
 				String sql = "UPDATE veiculo SET ativo = '0' WHERE placa = '"+ placa + "'";
-				System.out.println(sql);
+		
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					JOptionPane.showMessageDialog(null, "Veiculo desativado com sucesso!");
@@ -185,7 +185,7 @@ public class RepositorioVeiculo implements UtilFunctions{
 				}	
 			}
 			sql += " WHERE placa = '" + placa + "'";
-			System.out.println(sql);
+	
 			Conexao.getInstance().executaSQL(sql);
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);

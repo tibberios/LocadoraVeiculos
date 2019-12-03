@@ -11,6 +11,10 @@ public class ControleLocacao {
 		return repositorio;
 	}
 	
+	public ControleLocacao() {
+		repositorio = new RepositorioLocacao();
+	}
+	
 	public void setRepositorio(RepositorioLocacao repositorio) {
 		this.repositorio = repositorio;
 	}
@@ -26,9 +30,7 @@ public class ControleLocacao {
 	}
 	
 	public void inserirLocacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
-		System.out.println(2);
 		this.locacao = new Locacao(clienteCPF, veiculoPlaca, valorTotal, data_devolucao);
-		System.out.println(locacao.getData_devolucao());
 		this.repositorio.inserirLocacao(locacao);
 	}
 	

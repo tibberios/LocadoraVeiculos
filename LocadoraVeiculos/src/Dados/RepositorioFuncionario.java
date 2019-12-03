@@ -93,7 +93,7 @@ public class RepositorioFuncionario implements UtilFunctions{
 				if (!funcionario.getNome().isEmpty() && !funcionario.getCpf().isEmpty() && !funcionario.getSenha().isEmpty() && !funcionario.getTelefone().isEmpty() && !funcionario.getEmail().isEmpty()) {
 					sql += "'" + funcionario.getNome() + "', " + "'" + funcionario.getCpf() + "', " + "'" + funcionario.getSenha() + "', " + "'" + funcionario.getTelefone() + "', " + "'" + funcionario.getEmail() + "')";
 				}
-				System.out.println(Conexao.getInstance().conectado());
+
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					this.funcionarios.add(funcionario);
@@ -110,7 +110,7 @@ public class RepositorioFuncionario implements UtilFunctions{
 		try {
 			if (cpf != null && !cpf.trim().equals("")) {
 				String sql = "UPDATE funcionario SET ativo = '0' WHERE cpf = '" + cpf + "'";
-				System.out.println(sql);
+			
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso!");

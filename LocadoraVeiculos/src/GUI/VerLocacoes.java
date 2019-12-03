@@ -24,8 +24,7 @@ import Fachada.Fachada;
 public class VerLocacoes extends JFrame {
 
 	private JPanel contentPane;
-	JComboBox comboBox = new JComboBox();
-	private JTextField textCodigoLocacao;
+	JComboBox<String> comboBox = new JComboBox<String>();
 	public static VerLocacoes instance;
 	public static VerLocacoes getInstace() {
 		if (VerLocacoes.instance == null) {
@@ -68,7 +67,7 @@ public class VerLocacoes extends JFrame {
 		
 		preencheCMB();
 		
-		JComboBox comboBox = new JComboBox();
+//		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(53, 25, 347, 22);
 		contentPane.add(comboBox);
 		
@@ -88,8 +87,8 @@ public class VerLocacoes extends JFrame {
 			Fachada.getInstance().todasLocacoesCliente(cpf);
 			
 			for(Locacao l : Fachada.getInstance().getLocacao().getRepositorio().getLocacoes()) {
-				textArea.setText("Placa:" + l.getVeiculoPlaca() + "\nValor:" + l.getValorTotal() + "\nDataDevolucao: " + l.getData_devolucao()
-				+ "\nDataLocacao:" + l.getData_locacao() + "\n\n");
+				textArea.setText("Placa: " + l.getVeiculoPlaca() + "\nValor: " + l.getValorTotal() + "\nDataDevolucao: " + l.getData_devolucao()
+				+ "\nDataLocacao: " + l.getData_locacao() + "\n\n");
 			}
 			
 			}
@@ -97,20 +96,5 @@ public class VerLocacoes extends JFrame {
 		btnBuscar.setBackground(SystemColor.textHighlight);
 		btnBuscar.setBounds(171, 58, 91, 23);
 		contentPane.add(btnBuscar);
-		
-		JButton btnEncerrarLocao = new JButton("Encerrar Loca\u00E7\u00E3o");
-		btnEncerrarLocao.setBackground(UIManager.getColor("ToolBar.dockingForeground"));
-		btnEncerrarLocao.setBounds(277, 219, 127, 23);
-		contentPane.add(btnEncerrarLocao);
-		
-		JLabel lblCodigoDaLocap = new JLabel("Codigo Da Loca\u00E7\u00E3o");
-		lblCodigoDaLocap.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblCodigoDaLocap.setBounds(53, 228, 91, 14);
-		contentPane.add(lblCodigoDaLocap);
-		
-		textCodigoLocacao = new JTextField();
-		textCodigoLocacao.setBounds(153, 223, 91, 20);
-		contentPane.add(textCodigoLocacao);
-		textCodigoLocacao.setColumns(10);
 	}
 }

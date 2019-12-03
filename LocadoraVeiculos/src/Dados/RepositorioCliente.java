@@ -76,7 +76,6 @@ public class RepositorioCliente implements UtilFunctions {
 					sql += "'" + cliente.getNome() + "', " + "'" + cliente.getCpf() + "', '" + cliente.getTelefone() + "')";
 				}
 				
-				System.out.println(sql);
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					this.clientes.add(cliente);
@@ -93,7 +92,7 @@ public class RepositorioCliente implements UtilFunctions {
 		try {
 			if (cpf != null && !cpf.trim().equals("")) {
 				String sql = "UPDATE cliente SET ativo = '0' WHERE cpf = '" + cpf + "'";
-				System.out.println(sql);
+		
 				int rowInsered = Conexao.getInstance().executaSQL(sql);
 				if (rowInsered == 200) {
 					JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
@@ -124,7 +123,7 @@ public class RepositorioCliente implements UtilFunctions {
 			}
 
 			sql += " WHERE cpf = '" + cpf + "'";
-			System.out.println(sql);
+	
 			Conexao.getInstance().executaSQL(sql);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);

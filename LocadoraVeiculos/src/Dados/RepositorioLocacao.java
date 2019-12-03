@@ -11,7 +11,7 @@ import Entidades.Locacao;
 public class RepositorioLocacao{
 	private ArrayList<Locacao> locacoes;
 	private Locacao locacao;
-	
+
 	public RepositorioLocacao() {
 		this.setLocacoes(new ArrayList<Locacao>());
 	}
@@ -23,7 +23,7 @@ public class RepositorioLocacao{
 	public void setLocacoes(ArrayList<Locacao> locacoes) {
 		this.locacoes = locacoes;
 	}
-	
+
 	public void encontrarLocacao(String clienteCPF, String veiculoPlaca) {
 		try {
 			if ((clienteCPF != null && !clienteCPF.trim().equals("")) && (veiculoPlaca != null && !veiculoPlaca.trim().equals(""))) {
@@ -40,41 +40,39 @@ public class RepositorioLocacao{
 		} catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 		Conexao.getInstance().setResultset(null);	
 	}
-	
+
 	public boolean verificarSeExiste(Locacao locacao) {
 		this.encontrarLocacao(locacao.getClienteCPF(), locacao.getVeiculoPlaca());
 		if(locacoes.size() != 0)
-		for (Locacao loc: locacoes) {
-			if (locacao.getClienteCPF().equals(loc.getClienteCPF()) && locacao.getVeiculoPlaca().equals(loc.getVeiculoPlaca())) {
-				return true;
-			} 
-		}
+			for (Locacao loc: locacoes) {
+				if (locacao.getClienteCPF().equals(loc.getClienteCPF()) && locacao.getVeiculoPlaca().equals(loc.getVeiculoPlaca())) {
+					return true;
+				} 
+			}
 		return false;
 	}
-	
+
 	public void inserirLocacao(Locacao locacao) {
-		System.out.println(locacao.getClienteCPF());	
 		try {
-				
-				String sql = "INSERT INTO locacao (clienteCPF, veiculoPlaca, valorTotal, data_devolucao) VALUES (";
-				if (!locacao.getClienteCPF().isEmpty() && !locacao.getVeiculoPlaca().isEmpty() && locacao.getValorTotal() > 0 && !locacao.getData_devolucao().isEmpty()) {
-					sql += "'" + locacao.getClienteCPF() + "', " + "'" + locacao.getVeiculoPlaca() + "', "  + locacao.getValorTotal() + ", " + "'" + locacao.getData_devolucao() + "')"; 
-				}
-				System.out.println(sql);
-				int rowInsered = Conexao.getInstance().executaSQL(sql);
-				if (rowInsered == 200) {
-					this.locacoes.add(locacao);
-					JOptionPane.showMessageDialog(null, "Locacao inserida com sucesso!");
-				}				
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
+			String sql = "INSERT INTO locacao (clienteCPF, veiculoPlaca, valorTotal, data_devolucao) VALUES (";
+			if (!locacao.getClienteCPF().isEmpty() && !locacao.getVeiculoPlaca().isEmpty() && locacao.getValorTotal() > 0 && !locacao.getData_devolucao().isEmpty()) {
+				sql += "'" + locacao.getClienteCPF() + "', " + "'" + locacao.getVeiculoPlaca() + "', "  + locacao.getValorTotal() + ", " + "'" + locacao.getData_devolucao() + "')"; 
 			}
+
+			int rowInsered = Conexao.getInstance().executaSQL(sql);
+			if (rowInsered == 200) {
+				this.locacoes.add(locacao);
+				JOptionPane.showMessageDialog(null, "Locacao inserida com sucesso!");
+			}				
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
-	
-	
+	}
+
+
 	public void encontrarTodasLocacoesCliente(String clienteCPF) {
 		locacoes.clear();
 		String sql = "SELECT * FROM locacao  WHERE clienteCPF = '" + clienteCPF + "'";
@@ -89,14 +87,14 @@ public class RepositorioLocacao{
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 	}
-	
+
 	public void atualizarLocacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
 		try {
 			String sql = "UPDATE funcionario SET";
 			int aux = 0;
-			
+
 			if (valorTotal > 0) {
 				sql += " valorTotal = '" + valorTotal + "'";
 				aux = 1;
@@ -110,12 +108,12 @@ public class RepositorioLocacao{
 					sql += " data_devolucao = '" + data_devolucao + "'";
 				}
 			}
-			
+
 			sql += " WHERE clienteCPF = '" + clienteCPF + "'" + " AND veiculoPlaca = '" + veiculoPlaca + "'";
 			Conexao.getInstance().executaSQL(sql);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Houve um erro interno, solicite a equipe tecnica", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 }

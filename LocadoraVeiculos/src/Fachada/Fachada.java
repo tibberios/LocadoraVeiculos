@@ -210,7 +210,6 @@ public class Fachada {
 	}
 	
 	public void inserirLocacao(String clienteCPF, String veiculoPlaca, double valorTotal, String data_devolucao) {
-		System.out.println(1);
 		this.locacao.inserirLocacao(clienteCPF, veiculoPlaca, valorTotal, data_devolucao);
 	}
 	
@@ -233,12 +232,10 @@ public class Fachada {
 	}
 	
 	public void atualizarVeiculo(String placa , String marca , String modelo , String cor , int ano , double preco, int km_rodados) {
-		System.out.println(1);
 		this.veiculo.atualizar(placa, marca, modelo, cor, ano, preco, km_rodados);
 	}
 	
 	public void removerVeiculo(String placa) {
-		System.out.println(1);
 		this.veiculo.remove(placa);
 	}
 }
